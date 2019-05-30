@@ -8,9 +8,20 @@ UPI apps are *required to be installed already before using this library* becaus
 This API is in beta, there are lot of improvements are still needed.
 
 ## Demo 
-Start             |  Select UPI App             |  Complete Payment             |  Finish         
-:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
-![](Screenshots-Demo/EasyUpiPay1.png)  |  ![](Screenshots-Demo/EasyUpiPay2.png)|  ![](Screenshots-Demo/EasyUpiPay3.png)|  ![](Screenshots-Demo/EasyUpiPay4.png)
+<table style="width:100%">
+  <tr>
+    <th>1. Start</th>
+    <th>2. Select UPI App</th> 
+    <th>3. Complete Payment</th>
+    <th>4. Finish</th>
+  </tr>
+  <tr>
+    <td><img src="Screenshots-Demo/EasyUpiPay1.png"/></td>
+    <td><img src="Screenshots-Demo/EasyUpiPay2.png"/></td> 
+    <td><img src="Screenshots-Demo/EasyUpiPay3.png"/></td>
+    <td><img src="Screenshots-Demo/EasyUpiPay4.png"/></td>
+  </tr>
+</table>
 
 ## Implementation
 You can clone this repository and just import this project in Android Studio. Sample app is in [`/app`](/app) directory.
