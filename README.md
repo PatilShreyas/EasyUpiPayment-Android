@@ -1,12 +1,17 @@
-# Easy UPI Payment - Android Library
+# Easy UPI Payment - Android Library 📱💳
 
 ## Introduction
 Hello Everyone, I have developed this Android library to ***easily implement UPI Payment Integration in Android app.*** <br>
 UPI apps are *required to be installed already before using this library* because, internally this API calls UPI apps for payment processing. Before using it, make sure that your device is having atleast one UPI app installed. Otherwise it will unable to process the payments. <br>
 This API is in beta, there are lot of improvements are still needed.
 
+## Demo 
+Start             |  Select UPI App             |  Complete Payment             |  Finish         
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](Screenshots-Demo/EasyUpiPay1.png)  |  ![](Screenshots-Demo/EasyUpiPay2.png)|  ![](Screenshots-Demo/EasyUpiPay3.png)|  ![](Screenshots-Demo/EasyUpiPay4.png)
+
 ## Implementation
-You can clone this repository and just import this project in Android Studio. Sample app is in [/app](/app) directory.
+You can clone this repository and just import this project in Android Studio. Sample app is in [`/app`](/app) directory.
 
 ### Gradle
 In your `build.gradle` file of app module, add below dependency to import this library
