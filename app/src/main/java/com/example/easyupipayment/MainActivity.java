@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         //Create instance of EasyUpiPayment
         EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
-                .setPayeeVpa("9420788384@upi")
-                .setPayeeName("Sharad Shankar Patil")
-                .setDescription("Just Testing API!")
+                .setPayeeVpa("example@vpa")
+                .setPayeeName("Example")
+                .setDescription("Description or small note")
                 .setAmount("10.00")
                 .build();
 
