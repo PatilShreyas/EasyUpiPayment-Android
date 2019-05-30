@@ -4,6 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
@@ -12,13 +16,22 @@ import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 
 public class MainActivity extends AppCompatActivity implements PaymentStatusListener {
 
+    ImageView imageView;
+    TextView statusView;
+    Button payButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Initialize Components
+        imageView = findViewById(R.id.imageView);
+        statusView = findViewById(R.id.textView_status);
+        payButton = findViewById(R.id.button_pay);
+
         //Create instance of EasyUpiPayment
-        EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
+        final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
                 .setPayeeVpa("example@vpa")
                 .setPayeeName("Example")
@@ -29,31 +42,40 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         //Register Listener for Events
         easyUpiPayment.setPaymentStatusListener(this);
 
-        //Proceed for Payment
-        easyUpiPayment.startPayment();
+        //Proceed for Payment on click
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                easyUpiPayment.startPayment();
+            }
+        });
     }
 
     @Override
     public void onTransactionCompleted(TransactionDetails transactionDetails) {
         // Transaction Completed
         Log.d("TransactionDetails", transactionDetails.toString());
+        statusView.setText(transactionDetails.toString());
     }
 
     @Override
     public void onTransactionSuccess() {
         // Payment Success
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+        imageView.setImageResource(R.drawable.ic_success);
     }
 
     @Override
     public void onTransactionFailed() {
         // Payment Failed
         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+        imageView.setImageResource(R.drawable.ic_failed);
     }
 
     @Override
     public void onTransactionCancelled() {
         // Payment Cancelled by User
         Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+        imageView.setImageResource(R.drawable.ic_failed);
     }
 }
