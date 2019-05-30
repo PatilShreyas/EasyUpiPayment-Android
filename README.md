@@ -19,14 +19,7 @@ You can clone this repository and just import this project in Android Studio. Sa
 In your `build.gradle` file of app module, add below dependency to import this library
 
 ```gradle
-    repositories {
-      maven {
-        url 'https://dl.bintray.com/patilshreyas/maven'
-      }
-    }
     dependencies {
-      implementation fileTree(dir: 'libs', include: ['*.jar'])
-
       implementation 'com.shreyaspatil:EasyUpiPayment:0.1-beta'
     }
 ```
