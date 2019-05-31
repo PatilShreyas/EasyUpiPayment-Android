@@ -1,23 +1,31 @@
 package com.shreyaspatil.EasyUpiPayment.ui;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.shreyaspatil.EasyUpiPayment.R;
 import com.shreyaspatil.EasyUpiPayment.Singleton;
 import com.shreyaspatil.EasyUpiPayment.model.Payment;
 import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public final class PaymentUiActivity extends AppCompatActivity {
     private static final String TAG = "PaymentUiActivity";
-    private static final int PAYMENT_REQUEST = 4400;
+    public static final int PAYMENT_REQUEST = 4400;
     private Singleton singleton;
+
+    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +70,26 @@ public final class PaymentUiActivity extends AppCompatActivity {
 
         // Check if app is installed or not
         if(appChooser.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(appChooser, PAYMENT_REQUEST);
+        //TODO ON    startActivityForResult(appChooser, PAYMENT_REQUEST);
+            List<ResolveInfo> intentList = getPackageManager().queryIntentActivities(paymentIntent, 0);
+            showApps(intentList, paymentIntent);
         } else {
             Toast.makeText(this,"No UPI app found! Please Install to Proceed!", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void showApps(List<ResolveInfo> appsList, final Intent intent) {
+        //Listener to know about cancellation of payment
+        View.OnClickListener onCancelListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callbackTransactionCancelled();
+                finish();
+            }
+        };
+
+        AppsBottomSheet appsBottomSheet = new AppsBottomSheet(appsList, intent, onCancelListener);
+        appsBottomSheet.show(getSupportFragmentManager(), "Pay Using");
     }
 
     @Override
