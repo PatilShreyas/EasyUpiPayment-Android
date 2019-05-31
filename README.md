@@ -106,6 +106,38 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
         imageView.setImageResource(R.drawable.ic_failed);
     }
 ```
+
+### Getting Transaction Details
+To get details about transactions, we have callback method `onTransactionCompleted()` with parameter of `TransactionDetails`. TransactionDetails instance includes details about previously completed transaction.  <br>
+To get details, below method of `TransactionDetails` are useful :
+
+<table>
+  <tr>
+    <th>Method</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>getTransactionId()</td>
+    <td>Returns Transaction ID</td>
+  </tr>
+  <tr>
+    <td>getResponseCode()</td>
+    <td>Returns UPI Response Code</td>
+  </tr>
+  <tr>
+    <td>getApprovalRefNo()</td>
+    <td>Returns UPI Approval Reference Number (beneficiary)</td>
+  </tr>
+  <tr>
+    <td>`getStatus()`</td>
+    <td>Returns Status of transaction.<br>(Submitted/Success/Failure)<br></td>
+  </tr>
+  <tr>
+    <td>getTransactionRefId()</td>
+    <td>Returns Transaction reference ID passed in input</td>
+  </tr>
+</table>
+
 Hurrah.... We have successfully implemented UPI integration in our Android app.
 Thank You!
 
