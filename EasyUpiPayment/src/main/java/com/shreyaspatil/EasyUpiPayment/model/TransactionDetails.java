@@ -1,6 +1,7 @@
 package com.shreyaspatil.EasyUpiPayment.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class TransactionDetails {
     private String transactionId;
@@ -9,44 +10,37 @@ public class TransactionDetails {
     private String status;
     private String transactionRefId;
 
+    public TransactionDetails(String transactionId, String responseCode, String approvalRefNo, String status, String transactionRefId) {
+        this.transactionId = transactionId;
+        this.responseCode = responseCode;
+        this.approvalRefNo = approvalRefNo;
+        this.status = status;
+        this.transactionRefId = transactionRefId;
+    }
+
+    @Nullable
     public String getTransactionId() {
         return transactionId;
     }
 
-    public void setTransactionId(String transactionId) {
-        this.transactionId = transactionId;
-    }
-
+    @Nullable
     public String getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(String responseCode) {
-        this.responseCode = responseCode;
-    }
-
+    @Nullable
     public String getApprovalRefNo() {
         return approvalRefNo;
     }
 
-    public void setApprovalRefNo(String approvalRefNo) {
-        this.approvalRefNo = approvalRefNo;
-    }
-
+    @Nullable
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
+    @Nullable
     public String getTransactionRefId() {
         return transactionRefId;
-    }
-
-    public void setTransactionRefId(String transactionRefId) {
-        this.transactionRefId = transactionRefId;
     }
 
     @NonNull

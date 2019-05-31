@@ -14,7 +14,6 @@ import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public final class PaymentUiActivity extends AppCompatActivity {
     private static final String TAG = "PaymentUiActivity";
     private static final int PAYMENT_REQUEST = 4400;
@@ -112,16 +111,15 @@ public final class PaymentUiActivity extends AppCompatActivity {
 
     //Make TransactionDetails object from response string
     private TransactionDetails getTransactionDetails(String response) {
-        TransactionDetails transactionDetails = new TransactionDetails();
         Map<String, String> map = getQueryString(response);
 
-        transactionDetails.setTransactionId(map.get("txnId"));
-        transactionDetails.setResponseCode(map.get("responseCode"));
-        transactionDetails.setApprovalRefNo(map.get("ApprovalRefNo"));
-        transactionDetails.setStatus(map.get("Status"));
-        transactionDetails.setTransactionRefId(map.get("txnRef"));
+        String transactionId = map.get("txnId");
+        String responseCode = map.get("responseCode");
+        String approvalRefNo = map.get("ApprovalRefNo");
+        String status = map.get("Status");
+        String transactionRefId = map.get("txnRef");
 
-        return transactionDetails;
+        return new TransactionDetails(transactionId, responseCode, approvalRefNo, status, transactionRefId);
     }
 
 
