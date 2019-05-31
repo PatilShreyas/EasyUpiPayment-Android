@@ -65,12 +65,8 @@ public final class PaymentUiActivity extends AppCompatActivity {
         Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
         paymentIntent.setData(uri);
 
-        // Show Dialog to user
-        Intent appChooser = Intent.createChooser(paymentIntent, "Pay");
-
         // Check if app is installed or not
-        if(appChooser.resolveActivity(getPackageManager()) != null) {
-        //TODO ON    startActivityForResult(appChooser, PAYMENT_REQUEST);
+        if(paymentIntent.resolveActivity(getPackageManager()) != null) {
             List<ResolveInfo> intentList = getPackageManager().queryIntentActivities(paymentIntent, 0);
             showApps(intentList, paymentIntent);
         } else {
