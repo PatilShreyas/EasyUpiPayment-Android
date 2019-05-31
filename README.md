@@ -129,7 +129,7 @@ To get details, below method of `TransactionDetails` are useful :
     <td>Returns UPI Approval Reference Number (beneficiary)</td>
   </tr>
   <tr>
-    <td>`getStatus()`</td>
+    <td>getStatus()</td>
     <td>Returns Status of transaction.<br>(Submitted/Success/Failure)<br></td>
   </tr>
   <tr>
