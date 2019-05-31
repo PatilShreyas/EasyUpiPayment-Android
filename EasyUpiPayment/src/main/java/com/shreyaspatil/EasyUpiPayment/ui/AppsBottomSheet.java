@@ -48,7 +48,11 @@ public class AppsBottomSheet extends BottomSheetDialogFragment {
 
         mAdapter = new AppsAdapter(getActivity(), mList, mIntent);
         mRecyclerView.setAdapter(mAdapter);
+    }
 
-
+    //For Round Rectangle Effect
+    @Override
+    public int getTheme() {
+        return R.style.BottomSheetDialogTheme;
     }
 }
