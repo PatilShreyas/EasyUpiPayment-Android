@@ -25,4 +25,8 @@ public final class Singleton {
     public void setListener(@NonNull PaymentStatusListener listener) {
         this.listener = listener;
     }
+
+    public boolean isListenerRegistered() {
+        return (listener != null);
+    }
 }

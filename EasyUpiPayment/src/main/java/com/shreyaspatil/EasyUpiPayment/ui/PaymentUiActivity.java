@@ -78,21 +78,21 @@ public final class PaymentUiActivity extends AppCompatActivity {
                     TransactionDetails transactionDetails = getTransactionDetails(response);
 
                     //Update Listener onTransactionCompleted()
-                    singleton.getListener().onTransactionCompleted(transactionDetails);
+                    callbackTransactionComplete(transactionDetails);
 
                     //Check if success or failed
                     if (transactionDetails.getStatus().toLowerCase().equals("success")) {
-                        singleton.getListener().onTransactionSuccess();
+                        callbackTransactionSuccess();
                     } else {
-                        singleton.getListener().onTransactionFailed();
+                        callbackTransactionFailed();
                     }
                 } else {
                     Log.e(TAG, "Data is null");
-                    singleton.getListener().onTransactionFailed();
+                    callbackTransactionFailed();
                 }
             } else {
                 Log.e(TAG, "Transaction Cancelled by User");
-                singleton.getListener().onTransactionCancelled();
+                callbackTransactionCancelled();
             }
             finish();
         }
@@ -122,5 +122,32 @@ public final class PaymentUiActivity extends AppCompatActivity {
         return new TransactionDetails(transactionId, responseCode, approvalRefNo, status, transactionRefId);
     }
 
+    private boolean isListenerRegistered() {
+        return (Singleton.getInstance().isListenerRegistered());
+    }
+
+    private void callbackTransactionSuccess() {
+        if (isListenerRegistered()) {
+            singleton.getListener().onTransactionSuccess();
+        }
+    }
+
+    private void callbackTransactionFailed() {
+        if (isListenerRegistered()) {
+            singleton.getListener().onTransactionFailed();
+        }
+    }
+
+    private void callbackTransactionCancelled() {
+        if (isListenerRegistered()) {
+            singleton.getListener().onTransactionCancelled();
+        }
+    }
+
+    private void callbackTransactionComplete(TransactionDetails transactionDetails) {
+        if (isListenerRegistered()) {
+            singleton.getListener().onTransactionCompleted(transactionDetails);
+        }
+    }
 
 }
