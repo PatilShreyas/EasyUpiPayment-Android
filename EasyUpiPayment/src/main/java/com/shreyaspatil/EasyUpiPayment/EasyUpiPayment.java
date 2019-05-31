@@ -67,6 +67,10 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setPayeeVpa(@NonNull String vpa) {
+            if (!vpa.contains("@")) {
+                throw new IllegalStateException("Payee VPA address should be valid (For e.g. example@vpa)");
+            }
+
             payment.setVpa(vpa);
             return this;
         }
@@ -79,6 +83,9 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setPayeeName(@NonNull String name) {
+            if (name.trim().length() == 0) {
+                throw new IllegalStateException("Payee Name Should be Valid!");
+            }
             payment.setName(name);
             return this;
         }
@@ -91,6 +98,9 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setPayeeMerchantCode(@NonNull String merchantCode) {
+            if (merchantCode.trim().length() == 0) {
+                throw new IllegalStateException("Merchant Code Should be Valid!");
+            }
             payment.setPayeeMerchantCode(merchantCode);
             return this;
         }
@@ -103,6 +113,9 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setTransactionId(@NonNull String id) {
+            if (id.trim().length() == 0) {
+                throw new IllegalStateException("Transaction ID Should be Valid!");
+            }
             payment.setTxnRefId(id);
             return this;
         }
@@ -117,6 +130,9 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setTransactionRefId(@NonNull String refId) {
+            if (refId.trim().length() == 0) {
+                throw new IllegalStateException("RefId Should be Valid!");
+            }
             payment.setTxnRefId(refId);
             return this;
         }
@@ -129,6 +145,10 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public Builder setDescription(@NonNull String description) {
+            if (description.trim().length() == 0) {
+                throw new IllegalStateException("Description Should be Valid!");
+            }
+
             payment.setDescription(description);
             return this;
         }
