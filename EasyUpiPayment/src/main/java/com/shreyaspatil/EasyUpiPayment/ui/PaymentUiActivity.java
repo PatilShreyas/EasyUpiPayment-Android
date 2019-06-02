@@ -89,12 +89,14 @@ public final class PaymentUiActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        System.out.println("OnActivity :::: Req = "+requestCode + "ResultCode = "+resultCode+" Data = "+data);
         if(requestCode == PAYMENT_REQUEST) {
             if ((resultCode == RESULT_OK) || (resultCode == 11)) {
                 if (data != null) {
                     String response = data.getStringExtra("response");
+                    Log.e("Transaction:::",response);
                     TransactionDetails transactionDetails = getTransactionDetails(response);
 
                     //Update Listener onTransactionCompleted()

@@ -1,7 +1,5 @@
 package com.example.easyupipayment;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,15 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
 import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener;
 import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 
 public class MainActivity extends AppCompatActivity implements PaymentStatusListener {
 
-    ImageView imageView;
-    TextView statusView;
-    Button payButton;
+    private ImageView imageView;
+    private TextView statusView;
+    private Button payButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +33,11 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         //Create instance of EasyUpiPayment
         final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
-                .setPayeeVpa("example@vpa")
-                .setPayeeName("Example")
+                .setPayeeVpa("9420788384@upi")
+                .setPayeeName("Sharad Shankar Patil")
+                .setTransactionId("74658348")
                 .setDescription("Description or small note")
-                .setAmount("10.00")
+                .setAmount("2.00")
                 .build();
 
         //Register Listener for Events
