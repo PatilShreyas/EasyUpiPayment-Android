@@ -91,25 +91,26 @@ public final class PaymentUiActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        System.out.println("OnActivity :::: Req = "+requestCode + "ResultCode = "+resultCode+" Data = "+data);
         if(requestCode == PAYMENT_REQUEST) {
             if ((resultCode == RESULT_OK) || (resultCode == 11)) {
                 if (data != null) {
+                    //Get Response from activity intent
                     String response = data.getStringExtra("response");
-                    Log.e("Transaction:::",response);
                     TransactionDetails transactionDetails = getTransactionDetails(response);
 
                     //Update Listener onTransactionCompleted()
                     callbackTransactionComplete(transactionDetails);
 
-                    //Check if success or failed
+                    //Check if success, submitted or failed
                     if (transactionDetails.getStatus().toLowerCase().equals("success")) {
                         callbackTransactionSuccess();
+                    } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
+                        callbackTransactionSubmitted();
                     } else {
                         callbackTransactionFailed();
                     }
                 } else {
-                    Log.e(TAG, "Data is null");
+                    Log.e(TAG, "Intent Data is null");
                     callbackTransactionFailed();
                 }
             } else {
@@ -151,6 +152,12 @@ public final class PaymentUiActivity extends AppCompatActivity {
     private void callbackTransactionSuccess() {
         if (isListenerRegistered()) {
             singleton.getListener().onTransactionSuccess();
+        }
+    }
+
+    private void callbackTransactionSubmitted() {
+        if (isListenerRegistered()) {
+            singleton.getListener().onTransactionSubmitted();
         }
     }
 
