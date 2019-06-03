@@ -29,6 +29,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:layout_gravity="center"
             android:text="App Name"
             android:textColor="@android:color/black"
             android:textSize="14sp" />
