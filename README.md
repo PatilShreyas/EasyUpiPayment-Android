@@ -46,6 +46,7 @@ You can see below code, these are minimum and mandatory calls to enable payment 
                 .setPayeeVpa("EXAMPLE@VPA")
                 .setPayeeName("PAYEE_NAME")
                 .setTransactionId("UNIQUE_TRANSACTION_ID")
+                .setTransactionRefId("UNIQUE_TRANSACTION_REF_ID")
                 .setDescription("DESCRIPTION_OR_SMALL_NOT")
                 .setAmount("AMOUNT_IN_DECIMAL_XX.XX")
                 .build();
