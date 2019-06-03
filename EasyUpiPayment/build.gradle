@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "0.1-beta"
+version = "0.1"
 
 android {
     compileSdkVersion 28
@@ -78,8 +78,8 @@ install {
                 // Add your description here
                 groupId 'com.shreyaspatil'
                 artifactId = 'EasyUpiPayment'
-                name 'EasyUpiPayment' // TODO
-                description = 'Android Library to integrate UPI payment service easily in your Android app' // TODO
+                name 'EasyUpiPayment'
+                description = 'Android Library to integrate UPI payment service easily in your Android app'
                 url siteUrl
 
                 // Set your license
