@@ -10,7 +10,7 @@ import com.shreyaspatil.EasyUpiPayment.model.Payment;
 import com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity;
 
 /**
- * Class to implement Payment with UPI.
+ * Class to implement Easy UPI Payment
  *
  * Use {@link Builder} to create a new instance.
  */
@@ -23,6 +23,11 @@ public final class EasyUpiPayment {
         this.mPayment = mPayment;
     }
 
+    /**
+     * Starts the payment Transaction. Calling this method launches the Payment Menu
+     * and shows installed UPI apps in device and let user choose one of them to pay.
+     *
+     */
     public void startPayment() {
         Intent payIntent  = new Intent(mActivity, PaymentUiActivity.class);
         payIntent.putExtra("payment", mPayment);
@@ -49,7 +54,7 @@ public final class EasyUpiPayment {
         /**
          * Binds the Activity with Payment.
          *
-         * @param activity where payment is implemented.
+         * @param activity where payment is to be implemented.
          * @return this, for chaining.
          */
         @NonNull
@@ -184,6 +189,10 @@ public final class EasyUpiPayment {
 
             if (payment.getVpa() == null) {
                 throw new IllegalStateException("Must call setPayeeVpa() before build().");
+            }
+
+            if(payment.getTxnId() == null) {
+                throw new IllegalStateException("Must call setTransactionId() before build");
             }
 
             if (payment.getName() == null) {
