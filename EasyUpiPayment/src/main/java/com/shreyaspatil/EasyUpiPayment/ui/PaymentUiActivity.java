@@ -50,10 +50,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
             payUri.appendQueryParameter("mc", payment.getPayeeMerchantCode());
         }
 
-        if(payment.getTxnRefId() != null) {
-            payUri.appendQueryParameter("tr", payment.getTxnRefId());
-        }
-
+        payUri.appendQueryParameter("tr", payment.getTxnRefId());
         payUri.appendQueryParameter("tn", payment.getDescription());
         payUri.appendQueryParameter("am", payment.getAmount());
         payUri.appendQueryParameter("cu", payment.getCurrency());
@@ -92,29 +89,31 @@ public final class PaymentUiActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PAYMENT_REQUEST) {
-            if ((resultCode == RESULT_OK) || (resultCode == 11)) {
-                if (data != null) {
-                    //Get Response from activity intent
-                    String response = data.getStringExtra("response");
-                    TransactionDetails transactionDetails = getTransactionDetails(response);
+            if (data != null) {
+                //Get Response from activity intent
+                String response = data.getStringExtra("response");
 
-                    //Update Listener onTransactionCompleted()
-                    callbackTransactionComplete(transactionDetails);
+                if(response == null) {
+                    callbackTransactionCancelled();
+                    Log.d(TAG, "Response is null");
+                    finish();
+                }
 
-                    //Check if success, submitted or failed
-                    if (transactionDetails.getStatus().toLowerCase().equals("success")) {
-                        callbackTransactionSuccess();
-                    } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
-                        callbackTransactionSubmitted();
-                    } else {
-                        callbackTransactionFailed();
-                    }
+                TransactionDetails transactionDetails = getTransactionDetails(response);
+
+                //Update Listener onTransactionCompleted()
+                callbackTransactionComplete(transactionDetails);
+
+                //Check if success, submitted or failed
+                if (transactionDetails.getStatus().toLowerCase().equals("success")) {
+                    callbackTransactionSuccess();
+                } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
+                    callbackTransactionSubmitted();
                 } else {
-                    Log.e(TAG, "Intent Data is null");
                     callbackTransactionFailed();
                 }
             } else {
-                Log.e(TAG, "Transaction Cancelled by User");
+                Log.e(TAG, "Intent Data is null. User cancelled");
                 callbackTransactionCancelled();
             }
             finish();

@@ -195,6 +195,10 @@ public final class EasyUpiPayment {
                 throw new IllegalStateException("Must call setTransactionId() before build");
             }
 
+            if(payment.getTxnRefId() == null) {
+                throw new IllegalStateException("Must call setTransactionRefId() before build");
+            }
+
             if (payment.getName() == null) {
                 throw new IllegalStateException("Must call setPayeeName() before build().");
             }
