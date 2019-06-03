@@ -36,17 +36,16 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#919191"/>
+        android:background="#BDBDBD"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_app"
-        android:scrollIndicators="bottom"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:scrollIndicators="right"
+        android:scrollbars="vertical"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -67,4 +67,8 @@ public class Payment implements Serializable {
     public void setAmount(String amount) {
         this.amount = amount;
     }
+
+    public String getCurrency() {
+        return currency;
+    }
 }

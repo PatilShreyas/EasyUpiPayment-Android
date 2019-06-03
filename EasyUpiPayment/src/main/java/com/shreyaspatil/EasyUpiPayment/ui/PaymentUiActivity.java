@@ -44,21 +44,21 @@ public final class PaymentUiActivity extends AppCompatActivity {
         payUri.scheme("upi").authority("pay");
         payUri.appendQueryParameter("pa", payment.getVpa());
         payUri.appendQueryParameter("pn", payment.getName());
+        payUri.appendQueryParameter("tid", payment.getTxnId());
 
         if(payment.getPayeeMerchantCode() != null) {
             payUri.appendQueryParameter("mc", payment.getPayeeMerchantCode());
         }
-        if(payment.getTxnId() != null) {
-            payUri.appendQueryParameter("tid", payment.getTxnId());
-        }
+
         if(payment.getTxnRefId() != null) {
             payUri.appendQueryParameter("tr", payment.getTxnRefId());
         }
 
         payUri.appendQueryParameter("tn", payment.getDescription());
         payUri.appendQueryParameter("am", payment.getAmount());
-        payUri.appendQueryParameter("cu", "INR");
+        payUri.appendQueryParameter("cu", payment.getCurrency());
 
+        //Build URI
         Uri uri = payUri.build();
 
         // Set Data Intent

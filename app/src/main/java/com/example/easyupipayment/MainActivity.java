@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
                 .with(this)
                 .setPayeeVpa("9420788384@upi")
                 .setPayeeName("Sharad Shankar Patil")
-                .setTransactionId("74658348")
+                .setTransactionId(String.valueOf(System.currentTimeMillis()))
                 .setDescription("Description or small note")
                 .setAmount("2.00")
                 .build();

@@ -121,7 +121,7 @@ public final class EasyUpiPayment {
             if (id.trim().length() == 0) {
                 throw new IllegalStateException("Transaction ID Should be Valid!");
             }
-            payment.setTxnRefId(id);
+            payment.setTxnId(id);
             return this;
         }
 
