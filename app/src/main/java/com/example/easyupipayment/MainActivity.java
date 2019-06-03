@@ -33,11 +33,11 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         //Create instance of EasyUpiPayment
         final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
-                .setPayeeVpa("9420788384@upi")
-                .setPayeeName("Sharad Shankar Patil")
-                .setTransactionId(String.valueOf(System.currentTimeMillis()))
-                .setDescription("Description or small note")
-                .setAmount("2.00")
+                .setPayeeVpa("EXAMPLE@VPA")
+                .setPayeeName("PAYEE_NAME")
+                .setTransactionId("UNIQUE_TRANSACTION_ID")
+                .setDescription("DESCRIPTION_OR_SMALL_NOT")
+                .setAmount("AMOUNT_IN_DECIMAL_XX.XX")
                 .build();
 
         //Register Listener for Events
