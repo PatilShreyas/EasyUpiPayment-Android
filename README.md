@@ -113,7 +113,7 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
 ```
 **Description :**
 
-* `onTransactionCompleted()` - This method is invoked when transaction is completed. It may either `SUCCESS` or `FAILED`.
+* `onTransactionCompleted()` - This method is invoked when transaction is completed. It may either `SUCCESS`, `SUBMITTED` or `FAILED`.
 > **NOTE - If onTransactionCompleted() is invoked it doesn't means that payment is successful. It may fail but transaction is completed is the only purpose.**
 * `onTransactionSuccess()` - Invoked when Payment is successful.
 * `onTransactionSubmitted()` - Invoked when Payment is partially done/In waiting/Submitted/Pending.
