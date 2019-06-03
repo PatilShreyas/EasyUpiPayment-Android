@@ -67,6 +67,13 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     }
 
     @Override
+    public void onTransactionSubmitted() {
+        // Payment Pending
+        Toast.makeText(this, "Pending | Submitted", Toast.LENGTH_SHORT).show();
+        imageView.setImageResource(R.drawable.ic_success);
+    }
+
+    @Override
     public void onTransactionFailed() {
         // Payment Failed
         Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
