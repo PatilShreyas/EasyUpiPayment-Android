@@ -31,7 +31,7 @@ In your `build.gradle` file of app module, add below dependency to import this l
 
 ```gradle
     dependencies {
-      implementation 'com.shreyaspatil:EasyUpiPayment:1.0'
+      implementation 'com.shreyaspatil:EasyUpiPayment:1.1'
     }
 ```
 
@@ -155,6 +155,12 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
         Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
         imageView.setImageResource(R.drawable.ic_failed);
     }
+```
+
+### Removing Listener
+To remove listeners, you can invoke `detachListener()` after the transaction is completed or you haven’t to do with payment callbacks.
+```java
+easyUpiPayment.detachListener();
 ```
 
 ### Getting Transaction Details

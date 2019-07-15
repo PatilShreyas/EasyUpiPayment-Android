@@ -29,6 +29,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upipay);
 
+        // Get instance of Singleton class
         singleton = Singleton.getInstance();
 
         //Get Payment Information
@@ -93,21 +94,27 @@ public final class PaymentUiActivity extends AppCompatActivity {
                 if(response == null) {
                     callbackTransactionCancelled();
                     Log.d(TAG, "Response is null");
-                    finish();
-                }
 
-                TransactionDetails transactionDetails = getTransactionDetails(response);
-
-                //Update Listener onTransactionCompleted()
-                callbackTransactionComplete(transactionDetails);
-
-                //Check if success, submitted or failed
-                if (transactionDetails.getStatus().toLowerCase().equals("success")) {
-                    callbackTransactionSuccess();
-                } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
-                    callbackTransactionSubmitted();
                 } else {
-                    callbackTransactionFailed();
+
+                    TransactionDetails transactionDetails = getTransactionDetails(response);
+
+                    //Update Listener onTransactionCompleted()
+                    callbackTransactionComplete(transactionDetails);
+
+                    //Check if success, submitted or failed
+                    try {
+                        if (transactionDetails.getStatus().toLowerCase().equals("success")) {
+                            callbackTransactionSuccess();
+                        } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
+                            callbackTransactionSubmitted();
+                        } else {
+                            callbackTransactionFailed();
+                        }
+                    } catch (Exception e) {
+                        callbackTransactionCancelled();
+                        callbackTransactionFailed();
+                    }
                 }
             } else {
                 Log.e(TAG, "Intent Data is null. User cancelled");
@@ -174,7 +181,4 @@ public final class PaymentUiActivity extends AppCompatActivity {
             singleton.getListener().onTransactionCompleted(transactionDetails);
         }
     }
-
-
-
 }
