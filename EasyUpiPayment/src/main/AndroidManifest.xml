@@ -3,7 +3,9 @@
     package="com.shreyaspatil.EasyUpiPayment">
 
     <application>
-        <activity android:name="com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity"></activity>
+        <activity
+            android:name="com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
     </application>
 
 </manifest>

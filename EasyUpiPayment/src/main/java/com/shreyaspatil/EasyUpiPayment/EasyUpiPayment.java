@@ -26,7 +26,6 @@ public final class EasyUpiPayment {
     /**
      * Starts the payment Transaction. Calling this method launches the Payment Menu
      * and shows installed UPI apps in device and let user choose one of them to pay.
-     *
      */
     public void startPayment() {
         Intent payIntent  = new Intent(mActivity, PaymentUiActivity.class);
@@ -42,6 +41,13 @@ public final class EasyUpiPayment {
     public void setPaymentStatusListener(@NonNull PaymentStatusListener mListener) {
         Singleton singleton = Singleton.getInstance();
         singleton.setListener(mListener);
+    }
+
+    /**
+     * Removes the PaymentStatusListener which is already registered.
+     */
+    public void detachListener() {
+        Singleton.getInstance().detachListener();
     }
 
     /**
@@ -167,7 +173,7 @@ public final class EasyUpiPayment {
         @NonNull
         public Builder setAmount(@NonNull String amount) {
             if (!amount.contains(".")) {
-                throw new IllegalStateException("Amount should be in decimal format XX.XX");
+                throw new IllegalStateException("Amount should be in decimal format XX.XX (For e.g. 100.00)");
             }
 
             payment.setAmount(amount);
