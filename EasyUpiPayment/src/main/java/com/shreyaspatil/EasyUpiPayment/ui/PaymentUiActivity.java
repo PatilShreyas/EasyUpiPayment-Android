@@ -10,7 +10,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.shreyaspatil.EasyUpiPayment.R;
 import com.shreyaspatil.EasyUpiPayment.Singleton;
 import com.shreyaspatil.EasyUpiPayment.model.Payment;
@@ -24,8 +23,6 @@ public final class PaymentUiActivity extends AppCompatActivity {
     private static final String TAG = "PaymentUiActivity";
     public static final int PAYMENT_REQUEST = 4400;
     private Singleton singleton;
-
-    private BottomSheetBehavior bottomSheetBehavior;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
