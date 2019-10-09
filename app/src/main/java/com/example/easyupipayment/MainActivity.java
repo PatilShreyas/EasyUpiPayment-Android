@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
@@ -18,7 +19,14 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
     private ImageView imageView;
     private TextView statusView;
+    private TextView emailView;
+    private TextView payNameView;
+    private TextView transactionIdView;
+    private TextView transactionRefIdView;
+    private TextView descriptionOrNoteView;
+    private TextView amountView;
     private Button payButton;
+    EasyUpiPayment easyUpiPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,31 +34,54 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         setContentView(R.layout.activity_main);
 
         //Initialize Components
-        imageView = findViewById(R.id.imageView);
-        statusView = findViewById(R.id.textView_status);
-        payButton = findViewById(R.id.button_pay);
-
-        //Create instance of EasyUpiPayment
-        final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
-                .with(this)
-                .setPayeeVpa("example@vpa")
-                .setPayeeName("PAYEE_NAME")
-                .setTransactionId("TRANSACTION_ID")
-                .setTransactionRefId("TRANSACTION_REF_ID")
-                .setDescription("DESCRIPTION_OR_SHORT_NOTE")
-                .setAmount("AMOUNT IN XX.XX DECIMAL FORMAT")
-                .build();
-
-        //Register Listener for Events
-        easyUpiPayment.setPaymentStatusListener(this);
+        initComponents();
 
         //Proceed for Payment on click
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                easyUpiPayment.startPayment();
+                startPaymentEvent();
             }
         });
+    }
+
+    private void startPaymentEvent() {
+        try {
+            //Create instance of EasyUpiPayment
+            easyUpiPayment = new EasyUpiPayment.Builder()
+                    .with(this)
+                    .setPayeeVpa(emailView.getText().toString())
+                    .setPayeeName(payNameView.getText().toString())
+                    .setTransactionId(transactionIdView.getText().toString())
+                    .setTransactionRefId(transactionRefIdView.getText().toString())
+                    .setDescription(descriptionOrNoteView.getText().toString())
+                    .setAmount(amountView.getText().toString())
+                    .build();
+
+            //Register Listener for Events
+            easyUpiPayment.setPaymentStatusListener(this);
+            easyUpiPayment.startPayment();
+        }catch (RuntimeException e){
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Erro Campo invalido")
+                    .setMessage(e.getMessage())
+                    .setPositiveButton("Correct",null)
+                    .show();
+            Log.e("Erro: ", e.getMessage() );
+        }
+
+    }
+
+    private void initComponents() {
+        imageView = findViewById(R.id.imageView);
+        statusView = findViewById(R.id.textView_status);
+        emailView = findViewById(R.id.txt_payment_email);
+        payNameView = findViewById(R.id.txt_payment_name);
+        transactionIdView = findViewById(R.id.txt_payment_transaction_id);
+        transactionRefIdView = findViewById(R.id.txt_payment_transaction_ref_id);
+        descriptionOrNoteView = findViewById(R.id.txt_payment_description);
+        amountView = findViewById(R.id.txt_payment_amount);
+        payButton = findViewById(R.id.button_pay);
     }
 
     @Override
