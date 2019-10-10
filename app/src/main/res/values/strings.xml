@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EasyUPIPayment-Demo</string>
+    <string name="amount">Amount</string>
+    <string name="upi_id">UPI ID</string>
+    <string name="note">NOTE</string>
+    <string name="name">NAME</string>
 </resources>
