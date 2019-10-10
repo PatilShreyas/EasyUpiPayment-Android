@@ -19,6 +19,12 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private ImageView imageView;
     private TextView statusView;
     private Button payButton;
+    
+    public static final String PAYEE_VPA = "PAYEE@VPA";
+    public static final String PAYEE_NAME = "ENTER_NAME_HERE";
+    public static final String TRANSACTION_ID = System.currentTimeInMillis();
+    public static final String TRANSACTION_REF_ID = System.currentTimeInMillis();
+    public static final String DESCRIPTION = "Testing from Library";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +39,11 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         //Create instance of EasyUpiPayment
         final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
-                .setPayeeVpa("example@vpa")
-                .setPayeeName("PAYEE_NAME")
-                .setTransactionId("TRANSACTION_ID")
-                .setTransactionRefId("TRANSACTION_REF_ID")
-                .setDescription("DESCRIPTION_OR_SHORT_NOTE")
+                .setPayeeVpa(PAYEE_VPA)
+                .setPayeeName(PAYEE_NAME)
+                .setTransactionId(TRANSACTION_ID)
+                .setTransactionRefId(TRANSACTION_REF_ID)
+                .setDescription(DESCRIPTION)
                 .setAmount("AMOUNT IN XX.XX DECIMAL FORMAT")
                 .build();
 
