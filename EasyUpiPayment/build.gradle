@@ -5,11 +5,11 @@ apply plugin: "com.jfrog.bintray"
 version = "1.1"
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 28
         versionCode 2
         versionName version
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

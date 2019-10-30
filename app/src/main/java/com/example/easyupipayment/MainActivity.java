@@ -1,9 +1,11 @@
 package com.example.easyupipayment;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private ImageView imageView;
     private TextView statusView;
     private Button payButton;
+    private EditText Vpa,Pname,Tid,Trefid,Desc,Amt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +32,22 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         imageView = findViewById(R.id.imageView);
         statusView = findViewById(R.id.textView_status);
         payButton = findViewById(R.id.button_pay);
-
+        Vpa=findViewById(R.id.edittext_vpa);
+        Pname=findViewById(R.id.edittext_pname);
+        Tid=findViewById(R.id.edittext_tid);
+        Trefid=findViewById(R.id.edittext_trefid);
+        Desc=findViewById(R.id.edittext_desc);
+        Amt=findViewById(R.id.edittext_amt);
+        int vn = Integer.parseInt(Vpa.getText().toString());
         //Create instance of EasyUpiPayment
-        final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
+        @SuppressLint("ResourceType") final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
-                .setPayeeVpa("example@vpa")
-                .setPayeeName("PAYEE_NAME")
-                .setTransactionId("TRANSACTION_ID")
-                .setTransactionRefId("TRANSACTION_REF_ID")
-                .setDescription("DESCRIPTION_OR_SHORT_NOTE")
-                .setAmount("AMOUNT IN XX.XX DECIMAL FORMAT")
+                .setPayeeVpa(Vpa.getText().toString())
+                .setPayeeName(Pname.getText().toString())
+                .setTransactionId(Tid.getText().toString())
+                .setTransactionRefId(Trefid.getText().toString())
+                .setDescription(Desc.getText().toString())
+                .setAmount(Amt.getText().toString())
                 .build();
 
         //Register Listener for Events
