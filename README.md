@@ -199,3 +199,7 @@ Thank You!
 
 ## Contribute
 We can collaboratively make it happen. So if you have any issues, new ideas about implementations then just raise issue and we are open for Pull Requests. Improve and make it happen.
+See [Contributing Guidelines](CONTRIBUTING.md). 
+
+## License
+Project is published under the Apache 2.0 license. Feel free to clone and modify repo as you want, but don't forget to add reference to authors :)
