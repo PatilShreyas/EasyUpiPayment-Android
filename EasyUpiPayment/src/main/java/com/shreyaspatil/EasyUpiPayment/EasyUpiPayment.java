@@ -186,7 +186,7 @@ public final class EasyUpiPayment {
         @NonNull
         public EasyUpiPayment build() {
             if(activity == null) {
-                throw new IllegalStateException("Activity must be specified using with() call begore build()");
+                throw new IllegalStateException("Activity must be specified using with() call before build()");
             }
 
             if (payment == null) {
