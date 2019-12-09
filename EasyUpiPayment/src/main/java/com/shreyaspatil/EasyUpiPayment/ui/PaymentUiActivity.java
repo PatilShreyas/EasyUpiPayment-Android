@@ -22,6 +22,7 @@ import java.util.Map;
 public final class PaymentUiActivity extends AppCompatActivity {
     private static final String TAG = "PaymentUiActivity";
     public static final int PAYMENT_REQUEST = 4400;
+    public static final String APP_NOT_FOUND = "AppNotFound";
     private Singleton singleton;
 
     @Override
@@ -65,8 +66,15 @@ public final class PaymentUiActivity extends AppCompatActivity {
             List<ResolveInfo> intentList = getPackageManager().queryIntentActivities(paymentIntent, 0);
             showApps(intentList, paymentIntent);
         } else {
-            Toast.makeText(this,"No UPI app found! Please Install to Proceed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No UPI app found! Please Install to Proceed!",
+                    Toast.LENGTH_SHORT).show();
+            onAppNotFound();
         }
+    }
+
+    private void onAppNotFound() {
+        Log.e(APP_NOT_FOUND, "No UPI app found on device.");
+        callbackTransactionFailed();
     }
 
     private void showApps(List<ResolveInfo> appsList, final Intent intent) {
