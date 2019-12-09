@@ -10,6 +10,7 @@ public class Payment implements Serializable {
     private String txnRefId;
     private String description;
     private String amount;
+    private String defaultPackage;
     private final String currency = "INR";
 
     public String getVpa() {
@@ -70,5 +71,13 @@ public class Payment implements Serializable {
 
     public String getCurrency() {
         return currency;
+    }
+
+    public String getDefaultPackage() {
+        return defaultPackage;
+    }
+
+    public void setDefaultPackage(String defaultPackage) {
+        this.defaultPackage = defaultPackage;
     }
 }

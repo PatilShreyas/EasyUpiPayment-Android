@@ -2,11 +2,14 @@ package com.shreyaspatil.EasyUpiPayment;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener;
 import com.shreyaspatil.EasyUpiPayment.model.Payment;
+import com.shreyaspatil.EasyUpiPayment.model.PaymentApp;
 import com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity;
 
 /**
@@ -18,6 +21,8 @@ public final class EasyUpiPayment {
     private Activity mActivity;
     private Payment mPayment;
 
+    public static final String APP_NOT_FOUND = "AppNotFound";
+
     private EasyUpiPayment(@NonNull final Activity mActivity, @NonNull Payment mPayment) {
         this.mActivity = mActivity;
         this.mPayment = mPayment;
@@ -28,9 +33,33 @@ public final class EasyUpiPayment {
      * and shows installed UPI apps in device and let user choose one of them to pay.
      */
     public void startPayment() {
+        // Check whether default package exists
+        if (mPayment.getDefaultPackage() != null) {
+            // Check app existence
+            boolean isInstalled = isPackageInstalled(mPayment.getDefaultPackage(),
+                    mActivity.getPackageManager());
+
+            // If app isn't exist, throw error and return
+            if (!isInstalled) {
+                Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
+                        "' is not installed on this device.");
+
+                // Listener Callback
+                if (Singleton.getInstance().isListenerRegistered()) {
+                    Singleton.getInstance().getListener().onAppNotFound();
+                }
+                return;
+            }
+        }
+
+        // Create Payment Activity Intent
         Intent payIntent  = new Intent(mActivity, PaymentUiActivity.class);
         payIntent.putExtra("payment", mPayment);
+
+        // Start Payment Activity
         mActivity.startActivity(payIntent);
+
+        Log.e("STARTED", "STARTED ACTIVITY");
     }
 
     /**
@@ -48,6 +77,36 @@ public final class EasyUpiPayment {
      */
     public void detachListener() {
         Singleton.getInstance().detachListener();
+    }
+
+    /**
+     * Check Whether UPI App is installed on device or not
+     *
+     * @return true if app exists, otherwise false.
+     */
+    private boolean isPackageInstalled(String packageName, PackageManager packageManager) {
+        try {
+            packageManager.getPackageInfo(packageName, 0);
+            return true;
+        } catch (PackageManager.NameNotFoundException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Checks whether specified {@link Builder#setDefaultApp(PaymentApp)} default app is
+     * exists on device or not. If not specified, returns false.
+     *
+     * @return true if app exists. Otherwise returns false.
+     */
+    public boolean isDefaultAppExist() {
+        if (mPayment.getDefaultPackage() != null) {
+            return !isPackageInstalled(mPayment.getDefaultPackage(), mActivity.getPackageManager());
+        } else {
+            Log.w("Unpecified", "Default app is not speified. Specify it using " +
+                    "'setDefaultApp()' method of Builder class");
+            return false;
+        }
     }
 
     /**
@@ -180,6 +239,12 @@ public final class EasyUpiPayment {
             }
 
             payment.setAmount(amount);
+            return this;
+        }
+
+        @NonNull
+        public Builder setDefaultApp(@NonNull PaymentApp paymentApp) {
+            payment.setDefaultPackage(paymentApp.getPackageName());
             return this;
         }
 
