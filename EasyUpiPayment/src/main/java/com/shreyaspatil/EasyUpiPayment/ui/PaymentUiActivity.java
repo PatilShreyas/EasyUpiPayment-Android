@@ -19,6 +19,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.shreyaspatil.EasyUpiPayment.EasyUpiPayment.APP_NOT_FOUND;
+
 public final class PaymentUiActivity extends AppCompatActivity {
     private static final String TAG = "PaymentUiActivity";
     public static final int PAYMENT_REQUEST = 4400;
@@ -60,12 +62,21 @@ public final class PaymentUiActivity extends AppCompatActivity {
         Intent paymentIntent = new Intent(Intent.ACTION_VIEW);
         paymentIntent.setData(uri);
 
-        // Check if app is installed or not
+        // Check for Default package
+        if (payment.getDefaultPackage() != null) {
+            paymentIntent.setPackage(payment.getDefaultPackage());
+            //startActivityForResult(intent, PAYMENT_REQUEST);
+        }
+
+        // Check if other UPI apps are exists or not.
         if(paymentIntent.resolveActivity(getPackageManager()) != null) {
-            List<ResolveInfo> intentList = getPackageManager().queryIntentActivities(paymentIntent, 0);
+            List<ResolveInfo> intentList = getPackageManager()
+                    .queryIntentActivities(paymentIntent, 0);
             showApps(intentList, paymentIntent);
         } else {
-            Toast.makeText(this,"No UPI app found! Please Install to Proceed!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "No UPI app found! Please Install to Proceed!",
+                    Toast.LENGTH_SHORT).show();
+            callbackOnAppNotFound();
         }
     }
 
@@ -88,7 +99,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PAYMENT_REQUEST) {
             if (data != null) {
-                //Get Response from activity intent
+                // Get Response from activity intent
                 String response = data.getStringExtra("response");
 
                 if(response == null) {
@@ -135,7 +146,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
         return map;
     }
 
-    //Make TransactionDetails object from response string
+    // Make TransactionDetails object from response string
     private TransactionDetails getTransactionDetails(String response) {
         Map<String, String> map = getQueryString(response);
 
@@ -145,11 +156,27 @@ public final class PaymentUiActivity extends AppCompatActivity {
         String status = map.get("Status");
         String transactionRefId = map.get("txnRef");
 
-        return new TransactionDetails(transactionId, responseCode, approvalRefNo, status, transactionRefId);
+        return new TransactionDetails(
+                transactionId,
+                responseCode,
+                approvalRefNo,
+                status,
+                transactionRefId
+        );
     }
 
+    // Checks whether listener is registered
     private boolean isListenerRegistered() {
         return (Singleton.getInstance().isListenerRegistered());
+    }
+
+    private void callbackOnAppNotFound() {
+        Log.e(APP_NOT_FOUND, "No UPI app found on device.");
+
+        if (isListenerRegistered()) {
+            singleton.getListener().onAppNotFound();
+        }
+        finish();
     }
 
     private void callbackTransactionSuccess() {
