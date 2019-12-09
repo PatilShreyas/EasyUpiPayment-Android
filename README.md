@@ -4,7 +4,8 @@
 
 ## Introduction
 Hello Everyone, I have developed this Android library to ***easily implement UPI Payment Integration in Android app.*** <br>
-UPI apps are *required to be installed already before using this library* because, internally this API calls UPI apps for payment processing. Before using it, make sure that your device is having atleast one UPI app installed. Otherwise it will unable to process the payments. <br>
+- UPI apps are *required to be installed already before using this library* because, internally this API calls UPI apps for payment processing. 
+- Before using it, make sure that your device is having atleast one UPI app installed. Otherwise it will unable to process the payments. <br>
 This API is in beta, there are lot of improvements are still needed.
 
 ## Demo 
@@ -31,7 +32,7 @@ In your `build.gradle` file of app module, add below dependency to import this l
 
 ```gradle
     dependencies {
-      implementation 'com.shreyaspatil:EasyUpiPayment:1.1'
+      implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
     }
 ```
 
@@ -101,6 +102,23 @@ You can see below code, these are minimum and mandatory calls to enable payment 
   </tr>
 </table>
 
+#### App-Specific Payment
+If you want to pay only with specific app like BHIM UPI, PhonePe, PayTm, etc. Then you can use method `setDefaultPaymentApp()` of `EasyUpiPayment`.
+
+Following ENUM can be passed to this method.
+- `PaymentApp.BHIM_UPI`
+- `PaymentApp.AMAZON_PAY`
+- `PaymentApp.GOOGLE_PAY`
+- `PaymentApp.PHONE_PE`
+- `PaymentApp.PAYTM`
+
+Example:
+```java
+easyUpiPayment.setDefaultPaymentApp(PaymentApp.BHIM_UPI);
+``` 
+
+After this while payment, this app will be opened for transaction.
+
 #### Proceed to Payment
 To start the payment, just call `startPayment()` method of EasyUpiPayment and after that transaction is started.
 ```java
@@ -120,6 +138,7 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
 * `onTransactionSubmitted()` - Invoked when Payment is partially done/In waiting/Submitted/Pending.
 * `onTransactionFailed()` - Invoked when Payment is unsuccessful/failed.
 * `onTransactionCancelled()` - Invoked when Payment cancelled (User pressed back button or any reason).
+* `onAppNotFound();` - Invoked when app specified with `setDefaultPaymentApp()` is not exists on devie.
 ```java
     @Override
     public void onTransactionCompleted(TransactionDetails transactionDetails) {
@@ -154,6 +173,12 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
         // Payment Cancelled by User
         Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
         imageView.setImageResource(R.drawable.ic_failed);
+    }
+    
+    @Override
+    public void onAppNotFound() {
+        // App Not exists on Device 
+        Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
     }
 ```
 

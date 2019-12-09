@@ -8,6 +8,5 @@ public interface PaymentStatusListener {
     void onTransactionSubmitted();
     void onTransactionFailed();
     void onTransactionCancelled();
-
     void onAppNotFound();
 }
