@@ -35,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private EditText fieldDescription;
     private EditText fieldAmount;
 
-    private EasyUpiPayment mEasyUpiPayment;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         RadioButton paymentAppChoice = findViewById(radioAppChoice.getCheckedRadioButtonId());
 
         // START PAYMENT INITIALIZATION
-        mEasyUpiPayment = new EasyUpiPayment.Builder()
+        EasyUpiPayment mEasyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
                 .setPayeeVpa(payeeVpa)
                 .setPayeeName(payeeName)
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
                 .setAmount(amount)
                 .build();
 
-        //Register Listener for Events
+        // Register Listener for Events
         mEasyUpiPayment.setPaymentStatusListener(this);
 
         switch (paymentAppChoice.getId()) {
