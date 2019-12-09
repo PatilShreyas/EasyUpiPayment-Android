@@ -14,14 +14,12 @@ import com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity;
 
 /**
  * Class to implement Easy UPI Payment
- *
  * Use {@link Builder} to create a new instance.
  */
 public final class EasyUpiPayment {
+    public static final String APP_NOT_FOUND = "AppNotFound";
     private Activity mActivity;
     private Payment mPayment;
-
-    public static final String APP_NOT_FOUND = "AppNotFound";
 
     private EasyUpiPayment(@NonNull final Activity mActivity, @NonNull Payment mPayment) {
         this.mActivity = mActivity;
@@ -53,7 +51,7 @@ public final class EasyUpiPayment {
         }
 
         // Create Payment Activity Intent
-        Intent payIntent  = new Intent(mActivity, PaymentUiActivity.class);
+        Intent payIntent = new Intent(mActivity, PaymentUiActivity.class);
         payIntent.putExtra("payment", mPayment);
 
         // Start Payment Activity
@@ -278,7 +276,7 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public EasyUpiPayment build() {
-            if(activity == null) {
+            if (activity == null) {
                 throw new IllegalStateException("Activity must be specified using with() call begore build()");
             }
 
@@ -290,11 +288,11 @@ public final class EasyUpiPayment {
                 throw new IllegalStateException("Must call setPayeeVpa() before build().");
             }
 
-            if(payment.getTxnId() == null) {
+            if (payment.getTxnId() == null) {
                 throw new IllegalStateException("Must call setTransactionId() before build");
             }
 
-            if(payment.getTxnRefId() == null) {
+            if (payment.getTxnRefId() == null) {
                 throw new IllegalStateException("Must call setTransactionRefId() before build");
             }
 

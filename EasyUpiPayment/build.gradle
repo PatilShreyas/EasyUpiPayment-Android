@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: "com.jfrog.bintray"
 
-version = "2.0-dev"
+version = "2.0"
 
 android {
     compileSdkVersion 29
@@ -128,13 +128,13 @@ artifacts {
     archives sourcesJar
 }
 
-//Properties properties = new Properties()
-//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 // https://github.com/bintray/gradle-bintray-plugin
 bintray {
-    //user = properties.getProperty("bintray.user")
-    //key = properties.getProperty("bintray.apikey")
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
 
     configurations = ['archives']
     pkg {
@@ -148,7 +148,7 @@ bintray {
         version {
             gpg {
                 sign = true //Determines whether to GPG sign the files. The default is false
-                //passphrase = properties.getProperty("bintray.gpg.password") //Optional. The passphrase for GPG signing'
+                passphrase = properties.getProperty("bintray.gpg.password") //Optional. The passphrase for GPG signing'
             }
         }
     }

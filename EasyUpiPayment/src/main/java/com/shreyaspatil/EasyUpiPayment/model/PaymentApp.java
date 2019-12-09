@@ -6,8 +6,7 @@ public enum PaymentApp {
     BHIM_UPI(Package.BHIM_UPI),
     GOOGLE_PAY(Package.GOOGLE_PAY),
     PAYTM(Package.PAYTM),
-    PHONE_PE(Package.PHONE_PE),
-    TEST(Package.TEST);
+    PHONE_PE(Package.PHONE_PE);
 
     private String mPackageName;
 
@@ -25,6 +24,5 @@ public enum PaymentApp {
         static final String GOOGLE_PAY = "com.google.android.apps.nbu.paisa.user";
         static final String PHONE_PE = "com.phonepe.app";
         static final String PAYTM = "net.one97.paytm";
-        static final String TEST = "hfhf.hfhf.hfhf";
     }
 }

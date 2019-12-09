@@ -43,6 +43,13 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         setContentView(R.layout.activity_main);
 
         initViews();
+
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pay();
+            }
+        });
     }
 
     private void initViews() {
@@ -62,13 +69,6 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         fieldTransactionRefId.setText(transactionId);
 
         radioAppChoice = findViewById(R.id.radioAppChoice);
-
-        payButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pay();
-            }
-        });
     }
 
     private void pay() {
@@ -120,7 +120,6 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
             onAppNotFound();
             return;
         }
-
         // END INITIALIZATION
 
         // START PAYMENT
@@ -165,11 +164,5 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     @Override
     public void onAppNotFound() {
         Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mEasyUpiPayment.detachListener();
     }
 }
