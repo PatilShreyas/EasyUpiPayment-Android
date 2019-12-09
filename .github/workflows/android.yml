@@ -19,6 +19,9 @@ jobs:
       run: chmod +x ./gradlew
     - name: Build with Gradle
       run: ./gradlew build
-      
+    
     - name: Publish Package
-      run: ./gradlew clean build bintrayUpload -PbintrayUser={userid_bintray} -PbintrayKey={apikey_bintray} -PdryRun=false
+      env:
+        BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+        BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }} 
+      run: ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USER -PbintrayKey=BINTRAY_API_KEY -PdryRun=false
