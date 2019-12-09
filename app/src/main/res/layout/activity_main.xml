@@ -1,41 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/button_pay"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pay with UPI"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.523"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_status"
-        app:layout_constraintVertical_bias="0.349" />
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/field_vpa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="VPA" />
 
-    <TextView
-        android:id="@+id/textView_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Click Below button to Pay"
-        android:textColor="#000000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <EditText
+            android:id="@+id/field_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Payee Name" />
+
+        <EditText
+            android:id="@+id/field_transaction_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Transaction ID" />
+
+        <EditText
+            android:id="@+id/field_transaction_ref_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Transaction Ref ID" />
+
+        <EditText
+            android:id="@+id/field_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description" />
+
+        <EditText
+            android:id="@+id/field_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount (XX.XX)" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="UPI App :"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <RadioGroup
+            android:id="@+id/radioAppChoice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/app_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Default" />
+
+            <RadioButton
+                android:id="@+id/app_amazonpay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AmazonPay" />
+
+            <RadioButton
+                android:id="@+id/app_bhim_upi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="BHIM UPI" />
+
+            <RadioButton
+                android:id="@+id/app_google_pay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Google Pay" />
+
+            <RadioButton
+                android:id="@+id/app_phonepe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PhonePe" />
+
+            <RadioButton
+                android:id="@+id/app_paytm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PayTm" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/button_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Pay with UPI" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/textView_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="Click above button to Pay"
+            android:textColor="#000000"
+            android:textSize="19sp" />
+    </LinearLayout>
+</ScrollView>

@@ -58,8 +58,6 @@ public final class EasyUpiPayment {
 
         // Start Payment Activity
         mActivity.startActivity(payIntent);
-
-        Log.e("STARTED", "STARTED ACTIVITY");
     }
 
     /**
@@ -70,6 +68,39 @@ public final class EasyUpiPayment {
     public void setPaymentStatusListener(@NonNull PaymentStatusListener mListener) {
         Singleton singleton = Singleton.getInstance();
         singleton.setListener(mListener);
+    }
+
+    /**
+     * Sets default payment app for payment transaction.
+     *
+     * @param mPaymentApp Sets default payment app from Enum of {@link PaymentApp}.
+     *                    For e.g. To start payment with BHIM UPI then PaymentApp.BHIM_UPI
+     *                    {@link PaymentApp#BHIM_UPI}.
+     */
+    public void setDefaultPaymentApp(@NonNull PaymentApp mPaymentApp) {
+        boolean isInstalled = isPackageInstalled(mPaymentApp.getPackageName(),
+                mActivity.getPackageManager());
+
+        if (mPaymentApp == PaymentApp.NONE) {
+            mPayment.setDefaultPackage(null);
+            return;
+        }
+        // If app isn't exist, log error and return
+        if (!isInstalled) {
+            Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
+                    "' is not installed on this device.");
+
+            // Listener Callback
+            if (Singleton.getInstance().isListenerRegistered()) {
+                Singleton.getInstance().getListener().onAppNotFound();
+            }
+            // Set NONE package
+            mPayment.setDefaultPackage(PaymentApp.NONE.getPackageName());
+
+            return;
+        }
+
+        mPayment.setDefaultPackage(mPaymentApp.getPackageName());
     }
 
     /**
@@ -94,8 +125,8 @@ public final class EasyUpiPayment {
     }
 
     /**
-     * Checks whether specified {@link Builder#setDefaultApp(PaymentApp)} default app is
-     * exists on device or not. If not specified, returns false.
+     * Checks whether specified {@link EasyUpiPayment#setDefaultPaymentApp(PaymentApp)} default
+     * app is exists on device or not. If not specified, returns false.
      *
      * @return true if app exists. Otherwise returns false.
      */
@@ -239,12 +270,6 @@ public final class EasyUpiPayment {
             }
 
             payment.setAmount(amount);
-            return this;
-        }
-
-        @NonNull
-        public Builder setDefaultApp(@NonNull PaymentApp paymentApp) {
-            payment.setDefaultPackage(paymentApp.getPackageName());
             return this;
         }
 

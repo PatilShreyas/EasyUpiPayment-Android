@@ -4,7 +4,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -12,45 +15,116 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
 import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener;
+import com.shreyaspatil.EasyUpiPayment.model.PaymentApp;
 import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 
 public class MainActivity extends AppCompatActivity implements PaymentStatusListener {
 
     private ImageView imageView;
+
     private TextView statusView;
+
     private Button payButton;
+
+    private RadioGroup radioAppChoice;
+
+    private EditText fieldPayeeVpa;
+    private EditText fieldPayeeName;
+    private EditText fieldTransactionId;
+    private EditText fieldTransactionRefId;
+    private EditText fieldDescription;
+    private EditText fieldAmount;
+
+    private EasyUpiPayment mEasyUpiPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Initialize Components
+        initViews();
+    }
+
+    private void initViews() {
         imageView = findViewById(R.id.imageView);
         statusView = findViewById(R.id.textView_status);
         payButton = findViewById(R.id.button_pay);
 
-        //Create instance of EasyUpiPayment
-        final EasyUpiPayment easyUpiPayment = new EasyUpiPayment.Builder()
-                .with(this)
-                .setPayeeVpa("example@vpa")
-                .setPayeeName("PAYEE_NAME")
-                .setTransactionId("TRANSACTION_ID")
-                .setTransactionRefId("TRANSACTION_REF_ID")
-                .setDescription("DESCRIPTION_OR_SHORT_NOTE")
-                .setAmount("AMOUNT IN XX.XX DECIMAL FORMAT")
-                .build();
+        fieldPayeeVpa = findViewById(R.id.field_vpa);
+        fieldPayeeName = findViewById(R.id.field_name);
+        fieldTransactionId = findViewById(R.id.field_transaction_id);
+        fieldTransactionRefId = findViewById(R.id.field_transaction_ref_id);
+        fieldDescription = findViewById(R.id.field_description);
+        fieldAmount = findViewById(R.id.field_amount);
 
-        //Register Listener for Events
-        easyUpiPayment.setPaymentStatusListener(this);
+        String transactionId = "T" + System.currentTimeMillis();
+        fieldTransactionId.setText(transactionId);
+        fieldTransactionRefId.setText(transactionId);
 
-        //Proceed for Payment on click
+        radioAppChoice = findViewById(R.id.radioAppChoice);
+
         payButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                easyUpiPayment.startPayment();
+                pay();
             }
         });
+    }
+
+    private void pay() {
+        String payeeVpa = fieldPayeeVpa.getText().toString();
+        String payeeName = fieldPayeeName.getText().toString();
+        String transactionId = fieldTransactionId.getText().toString();
+        String transactionRefId = fieldTransactionRefId.getText().toString();
+        String description = fieldDescription.getText().toString();
+        String amount = fieldAmount.getText().toString();
+        RadioButton paymentAppChoice = findViewById(radioAppChoice.getCheckedRadioButtonId());
+
+        // START PAYMENT INITIALIZATION
+        mEasyUpiPayment = new EasyUpiPayment.Builder()
+                .with(this)
+                .setPayeeVpa(payeeVpa)
+                .setPayeeName(payeeName)
+                .setTransactionId(transactionId)
+                .setTransactionRefId(transactionRefId)
+                .setDescription(description)
+                .setAmount(amount)
+                .build();
+
+        //Register Listener for Events
+        mEasyUpiPayment.setPaymentStatusListener(this);
+
+        switch (paymentAppChoice.getId()) {
+            case R.id.app_default:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.NONE);
+                break;
+            case R.id.app_amazonpay:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.AMAZON_PAY);
+                break;
+            case R.id.app_bhim_upi:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.BHIM_UPI);
+                break;
+            case R.id.app_google_pay:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.GOOGLE_PAY);
+                break;
+            case R.id.app_phonepe:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.PHONE_PE);
+                break;
+            case R.id.app_paytm:
+                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.PAYTM);
+                break;
+        }
+
+        // Check if app exists or not
+        if (mEasyUpiPayment.isDefaultAppExist()) {
+            onAppNotFound();
+            return;
+        }
+
+        // END INITIALIZATION
+
+        // START PAYMENT
+        mEasyUpiPayment.startPayment();
     }
 
     @Override
@@ -86,5 +160,16 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         // Payment Cancelled by User
         Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
         imageView.setImageResource(R.drawable.ic_failed);
+    }
+
+    @Override
+    public void onAppNotFound() {
+        Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mEasyUpiPayment.detachListener();
     }
 }

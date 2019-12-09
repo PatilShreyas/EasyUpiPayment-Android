@@ -1,6 +1,7 @@
 package com.shreyaspatil.EasyUpiPayment.model;
 
 public enum PaymentApp {
+    NONE(""),
     AMAZON_PAY(Package.AMAZON_PAY),
     BHIM_UPI(Package.BHIM_UPI),
     GOOGLE_PAY(Package.GOOGLE_PAY),
