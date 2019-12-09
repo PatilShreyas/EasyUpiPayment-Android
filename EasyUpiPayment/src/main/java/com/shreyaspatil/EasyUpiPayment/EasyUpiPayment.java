@@ -2,22 +2,19 @@ package com.shreyaspatil.EasyUpiPayment;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener;
 import com.shreyaspatil.EasyUpiPayment.model.Payment;
-import com.shreyaspatil.EasyUpiPayment.model.PaymentApp;
 import com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity;
 
 /**
  * Class to implement Easy UPI Payment
+ *
  * Use {@link Builder} to create a new instance.
  */
 public final class EasyUpiPayment {
-    public static final String APP_NOT_FOUND = "AppNotFound";
     private Activity mActivity;
     private Payment mPayment;
 
@@ -31,30 +28,8 @@ public final class EasyUpiPayment {
      * and shows installed UPI apps in device and let user choose one of them to pay.
      */
     public void startPayment() {
-        // Check whether default package exists
-        if (mPayment.getDefaultPackage() != null) {
-            // Check app existence
-            boolean isInstalled = isPackageInstalled(mPayment.getDefaultPackage(),
-                    mActivity.getPackageManager());
-
-            // If app isn't exist, throw error and return
-            if (!isInstalled) {
-                Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
-                        "' is not installed on this device.");
-
-                // Listener Callback
-                if (Singleton.getInstance().isListenerRegistered()) {
-                    Singleton.getInstance().getListener().onAppNotFound();
-                }
-                return;
-            }
-        }
-
-        // Create Payment Activity Intent
-        Intent payIntent = new Intent(mActivity, PaymentUiActivity.class);
+        Intent payIntent  = new Intent(mActivity, PaymentUiActivity.class);
         payIntent.putExtra("payment", mPayment);
-
-        // Start Payment Activity
         mActivity.startActivity(payIntent);
     }
 
@@ -69,73 +44,10 @@ public final class EasyUpiPayment {
     }
 
     /**
-     * Sets default payment app for payment transaction.
-     *
-     * @param mPaymentApp Sets default payment app from Enum of {@link PaymentApp}.
-     *                    For e.g. To start payment with BHIM UPI then PaymentApp.BHIM_UPI
-     *                    {@link PaymentApp#BHIM_UPI}.
-     */
-    public void setDefaultPaymentApp(@NonNull PaymentApp mPaymentApp) {
-        boolean isInstalled = isPackageInstalled(mPaymentApp.getPackageName(),
-                mActivity.getPackageManager());
-
-        if (mPaymentApp == PaymentApp.NONE) {
-            mPayment.setDefaultPackage(null);
-            return;
-        }
-        // If app isn't exist, log error and return
-        if (!isInstalled) {
-            Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
-                    "' is not installed on this device.");
-
-            // Listener Callback
-            if (Singleton.getInstance().isListenerRegistered()) {
-                Singleton.getInstance().getListener().onAppNotFound();
-            }
-            // Set NONE package
-            mPayment.setDefaultPackage(PaymentApp.NONE.getPackageName());
-
-            return;
-        }
-
-        mPayment.setDefaultPackage(mPaymentApp.getPackageName());
-    }
-
-    /**
      * Removes the PaymentStatusListener which is already registered.
      */
     public void detachListener() {
         Singleton.getInstance().detachListener();
-    }
-
-    /**
-     * Check Whether UPI App is installed on device or not
-     *
-     * @return true if app exists, otherwise false.
-     */
-    private boolean isPackageInstalled(String packageName, PackageManager packageManager) {
-        try {
-            packageManager.getPackageInfo(packageName, 0);
-            return true;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
-    }
-
-    /**
-     * Checks whether specified {@link EasyUpiPayment#setDefaultPaymentApp(PaymentApp)} default
-     * app is exists on device or not. If not specified, returns false.
-     *
-     * @return true if app exists. Otherwise returns false.
-     */
-    public boolean isDefaultAppExist() {
-        if (mPayment.getDefaultPackage() != null) {
-            return !isPackageInstalled(mPayment.getDefaultPackage(), mActivity.getPackageManager());
-        } else {
-            Log.w("Unpecified", "Default app is not speified. Specify it using " +
-                    "'setDefaultApp()' method of Builder class");
-            return false;
-        }
     }
 
     /**
@@ -237,11 +149,9 @@ public final class EasyUpiPayment {
         }
 
         /**
-         * Sets the Description. It have to provide valid small note or description about payment.
-         * for e.g. For Food
+         * Sets the Description. It have to provide valid small note or description about payment. for e.g. For Food
          *
-         * @param description field have to provide valid small note or description about payment.
-         *                    for e.g. For Food, For Payment at Shop XYZ
+         * @param description field have to provide valid small note or description about payment. for e.g. For Food
          * @return this, for chaining.
          */
         @NonNull
@@ -257,8 +167,7 @@ public final class EasyUpiPayment {
         /**
          * Sets the Amount in INR. (Format should be decimal e.g. 14.88)
          *
-         * @param amount field takes amount in String decimal format (xx.xx) to be paid.
-         *               For e.g. 90.88 will pay Rs. 90.88.
+         * @param amount field takes amount in String decimal format (xx.xx) to be paid. For e.g. 90.88 will pay Rs. 90.88.
          * @return this, for chaining.
          */
         @NonNull
@@ -276,8 +185,8 @@ public final class EasyUpiPayment {
          */
         @NonNull
         public EasyUpiPayment build() {
-            if (activity == null) {
-                throw new IllegalStateException("Activity must be specified using with() call begore build()");
+            if(activity == null) {
+                throw new IllegalStateException("Activity must be specified using with() call before build()");
             }
 
             if (payment == null) {
@@ -288,11 +197,11 @@ public final class EasyUpiPayment {
                 throw new IllegalStateException("Must call setPayeeVpa() before build().");
             }
 
-            if (payment.getTxnId() == null) {
+            if(payment.getTxnId() == null) {
                 throw new IllegalStateException("Must call setTransactionId() before build");
             }
 
-            if (payment.getTxnRefId() == null) {
+            if(payment.getTxnRefId() == null) {
                 throw new IllegalStateException("Must call setTransactionRefId() before build");
             }
 
