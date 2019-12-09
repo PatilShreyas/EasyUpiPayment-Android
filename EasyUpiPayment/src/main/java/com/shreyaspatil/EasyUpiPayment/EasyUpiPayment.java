@@ -149,9 +149,11 @@ public final class EasyUpiPayment {
         }
 
         /**
-         * Sets the Description. It have to provide valid small note or description about payment. for e.g. For Food
+         * Sets the Description. It have to provide valid small note or description about payment.
+         * for e.g. For Food
          *
-         * @param description field have to provide valid small note or description about payment. for e.g. For Food
+         * @param description field have to provide valid small note or description about payment.
+         *                    for e.g. For Food, For Payment at Shop XYZ
          * @return this, for chaining.
          */
         @NonNull
@@ -167,7 +169,8 @@ public final class EasyUpiPayment {
         /**
          * Sets the Amount in INR. (Format should be decimal e.g. 14.88)
          *
-         * @param amount field takes amount in String decimal format (xx.xx) to be paid. For e.g. 90.88 will pay Rs. 90.88.
+         * @param amount field takes amount in String decimal format (xx.xx) to be paid.
+         *               For e.g. 90.88 will pay Rs. 90.88.
          * @return this, for chaining.
          */
         @NonNull
