@@ -147,7 +147,7 @@ To register for callback events, you will have to set `PaymentStatusListener` wi
 * `onTransactionSubmitted()` - Invoked when Payment is partially done/In waiting/Submitted/Pending.
 * `onTransactionFailed()` - Invoked when Payment is unsuccessful/failed.
 * `onTransactionCancelled()` - Invoked when Payment cancelled (User pressed back button or any reason).
-* `onAppNotFound();` - Invoked when app specified with `setDefaultPaymentApp()` is not exists on devie.
+* `onAppNotFound()` - Invoked when app specified with `setDefaultPaymentApp()` is not exists on device.
 ```java
     @Override
     public void onTransactionCompleted(TransactionDetails transactionDetails) {
