@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
     app:behavior_hideable="false"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-    android:layout_height="match_parent">
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="8dp">
+
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:textStyle="bold"
             android:layout_centerInParent="true"
+            android:layout_margin="8dp"
+            android:text="@string/text_pay_using"
             android:textColor="#000"
-            android:text="@string/text_pay_using" />
+            android:textStyle="bold" />
 
         <ImageButton
             android:id="@+id/cancelPaymentButton"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
             android:src="@drawable/ic_close" />
@@ -39,18 +40,18 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#BDBDBD"/>
+        android:background="#BDBDBD" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/item_app"
+        android:layout_margin="8dp"
         android:scrollIndicators="right"
         android:scrollbars="vertical"
-        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_app" />
 </LinearLayout>

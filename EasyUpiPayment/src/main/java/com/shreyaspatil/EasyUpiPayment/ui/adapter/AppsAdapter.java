@@ -49,7 +49,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.AppViewHolder>
             public void onClick(View v) {
                 Intent intent = mIntent;
                 intent.setPackage(info.activityInfo.packageName);
-                ((Activity)mContext).startActivityForResult(intent, PaymentUiActivity.PAYMENT_REQUEST);
+                ((Activity) mContext).startActivityForResult(intent, PaymentUiActivity.PAYMENT_REQUEST);
             }
         });
     }
@@ -59,7 +59,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.AppViewHolder>
         return mList.size();
     }
 
-    //ViewHolder class for RecyclerView
+    // ViewHolder class for RecyclerView
     static class AppViewHolder extends RecyclerView.ViewHolder {
         ImageView iconView;
         TextView nameView;
@@ -72,7 +72,7 @@ public class AppsAdapter extends RecyclerView.Adapter<AppsAdapter.AppViewHolder>
 
         void bind(String name, Drawable icon) {
             nameView.setText(name);
-           iconView.setImageDrawable(icon);
+            iconView.setImageDrawable(icon);
         }
     }
 }

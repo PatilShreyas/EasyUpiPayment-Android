@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clickable="true"
     android:foreground="?android:attr/selectableItemBackground"
 
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:orientation="vertical">
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1.0"
         android:layout_margin="1dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
+        android:orientation="horizontal"
+        android:weightSum="1.0">
 
         <ImageView
             android:id="@+id/appIconView"
-            android:layout_weight="0.2"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_gravity="center"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:layout_weight="0.2" />
 
         <TextView
             android:id="@+id/appNameView"
-            android:layout_weight="0.8"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_weight="0.8"
             android:text="App Name"
             android:textColor="@android:color/black"
             android:textSize="14sp" />

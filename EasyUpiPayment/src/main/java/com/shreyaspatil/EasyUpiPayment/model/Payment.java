@@ -3,6 +3,7 @@ package com.shreyaspatil.EasyUpiPayment.model;
 import java.io.Serializable;
 
 public class Payment implements Serializable {
+    private final String currency = "INR";
     private String vpa;
     private String name;
     private String payeeMerchantCode;
@@ -11,7 +12,6 @@ public class Payment implements Serializable {
     private String description;
     private String amount;
     private String defaultPackage;
-    private final String currency = "INR";
 
     public String getVpa() {
         return vpa;

@@ -22,8 +22,8 @@ import java.util.Map;
 import static com.shreyaspatil.EasyUpiPayment.EasyUpiPayment.APP_NOT_FOUND;
 
 public final class PaymentUiActivity extends AppCompatActivity {
-    private static final String TAG = "PaymentUiActivity";
     public static final int PAYMENT_REQUEST = 4400;
+    private static final String TAG = "PaymentUiActivity";
     private Singleton singleton;
 
     @Override
@@ -46,7 +46,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
         payUri.appendQueryParameter("pn", payment.getName());
         payUri.appendQueryParameter("tid", payment.getTxnId());
 
-        if(payment.getPayeeMerchantCode() != null) {
+        if (payment.getPayeeMerchantCode() != null) {
             payUri.appendQueryParameter("mc", payment.getPayeeMerchantCode());
         }
 
@@ -65,11 +65,10 @@ public final class PaymentUiActivity extends AppCompatActivity {
         // Check for Default package
         if (payment.getDefaultPackage() != null) {
             paymentIntent.setPackage(payment.getDefaultPackage());
-            //startActivityForResult(intent, PAYMENT_REQUEST);
         }
 
         // Check if other UPI apps are exists or not.
-        if(paymentIntent.resolveActivity(getPackageManager()) != null) {
+        if (paymentIntent.resolveActivity(getPackageManager()) != null) {
             List<ResolveInfo> intentList = getPackageManager()
                     .queryIntentActivities(paymentIntent, 0);
             showApps(intentList, paymentIntent);
@@ -97,24 +96,25 @@ public final class PaymentUiActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == PAYMENT_REQUEST) {
+        if (requestCode == PAYMENT_REQUEST) {
             if (data != null) {
                 // Get Response from activity intent
                 String response = data.getStringExtra("response");
 
-                if(response == null) {
+                if (response == null) {
                     callbackTransactionCancelled();
                     Log.d(TAG, "Response is null");
 
                 } else {
-
-                    TransactionDetails transactionDetails = getTransactionDetails(response);
-
-                    //Update Listener onTransactionCompleted()
-                    callbackTransactionComplete(transactionDetails);
-
-                    //Check if success, submitted or failed
                     try {
+                        // Get transactions details from response.
+                        TransactionDetails transactionDetails = getTransactionDetails(response);
+
+                        // Update Listener onTransactionCompleted()
+                        callbackTransactionComplete(transactionDetails);
+
+                        // Check if success, submitted or failed
+
                         if (transactionDetails.getStatus().toLowerCase().equals("success")) {
                             callbackTransactionSuccess();
                         } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
@@ -137,7 +137,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
 
     private Map<String, String> getQueryString(String url) {
         String[] params = url.split("&");
-        Map<String, String> map = new HashMap<String, String>();
+        Map<String, String> map = new HashMap<>();
         for (String param : params) {
             String name = param.split("=")[0];
             String value = param.split("=")[1];

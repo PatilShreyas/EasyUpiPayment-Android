@@ -10,7 +10,7 @@ public final class Singleton {
     private PaymentStatusListener listener;
 
     public static Singleton getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new Singleton();
         }
         return instance;
