@@ -41,7 +41,7 @@ In your `build.gradle` file of app module, add below dependency to import this l
 
 ```gradle
     dependencies {
-      implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
+        implementation 'com.shreyaspatil:EasyUpiPayment:2.1'
     }
 ```
 
