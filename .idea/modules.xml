@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/EasyUPIPayment.iml" filepath="$PROJECT_DIR$/EasyUPIPayment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" filepath="$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/EasyUPIPayment.iml" filepath="$PROJECT_DIR$/EasyUPIPayment.iml" group="EasyUPIPayment" />
+      <module fileurl="file://$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" filepath="$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" group="EasyUPIPayment/EasyUpiPayment" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="EasyUPIPayment/app" />
     </modules>
   </component>
 </project>
