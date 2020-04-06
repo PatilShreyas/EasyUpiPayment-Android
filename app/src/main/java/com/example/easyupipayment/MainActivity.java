@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         fieldDescription = findViewById(R.id.field_description);
         fieldAmount = findViewById(R.id.field_amount);
 
-        String transactionId = "T" + System.currentTimeMillis();
+        String transactionId = "TID" + System.currentTimeMillis();
         fieldTransactionId.setText(transactionId);
         fieldTransactionRefId.setText(transactionId);
 
