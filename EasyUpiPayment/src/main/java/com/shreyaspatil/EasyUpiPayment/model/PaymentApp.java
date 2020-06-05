@@ -1,7 +1,7 @@
 package com.shreyaspatil.EasyUpiPayment.model;
 
 public enum PaymentApp {
-    NONE(""),
+    NONE(Package.NONE),
     AMAZON_PAY(Package.AMAZON_PAY),
     BHIM_UPI(Package.BHIM_UPI),
     GOOGLE_PAY(Package.GOOGLE_PAY),
@@ -19,6 +19,7 @@ public enum PaymentApp {
     }
 
     private static final class Package {
+        private static final String NONE = "";
         static final String AMAZON_PAY = "in.amazon.mShop.android.shopping";
         static final String BHIM_UPI = "in.org.npci.upiapp";
         static final String GOOGLE_PAY = "com.google.android.apps.nbu.paisa.user";
