@@ -52,7 +52,7 @@ public final class EasyUpiPayment {
 
         // Create Payment Activity Intent
         Intent payIntent = new Intent(mActivity, PaymentUiActivity.class);
-        payIntent.putExtra("payment", mPayment);
+        payIntent.putExtra(PaymentUiActivity.EXTRA_KEY_PAYMENT, mPayment);
 
         // Start Payment Activity
         mActivity.startActivity(payIntent);
@@ -277,7 +277,7 @@ public final class EasyUpiPayment {
         @NonNull
         public EasyUpiPayment build() {
             if (activity == null) {
-                throw new IllegalStateException("Activity must be specified using with() call begore build()");
+                throw new IllegalStateException("Activity must be specified using with() call before build()");
             }
 
             if (payment == null) {
