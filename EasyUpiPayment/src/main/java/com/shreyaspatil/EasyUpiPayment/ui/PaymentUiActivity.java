@@ -16,13 +16,12 @@ import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.shreyaspatil.EasyUpiPayment.EasyUpiPayment.APP_NOT_FOUND;
-
 public final class PaymentUiActivity extends AppCompatActivity {
+
+    private static final String TAG = PaymentUiActivity.class.getSimpleName();
 
     public static final int PAYMENT_REQUEST = 4400;
     public static final String EXTRA_KEY_PAYMENT = "payment";
-    private static final String TAG = PaymentUiActivity.class.getSimpleName();
 
     private Singleton singleton;
     private Payment payment;
@@ -161,7 +160,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
     }
 
     private void callbackOnAppNotFound() {
-        Log.e(APP_NOT_FOUND, "No UPI app found on device.");
+        Log.e(TAG, "No UPI app found on device.");
 
         if (isListenerRegistered()) {
             singleton.getListener().onAppNotFound();
