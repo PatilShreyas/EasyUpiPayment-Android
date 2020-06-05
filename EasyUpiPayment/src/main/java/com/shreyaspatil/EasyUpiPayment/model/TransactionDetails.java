@@ -9,13 +9,22 @@ public class TransactionDetails {
     private String approvalRefNo;
     private String status;
     private String transactionRefId;
+    private String amount;
 
-    public TransactionDetails(String transactionId, String responseCode, String approvalRefNo, String status, String transactionRefId) {
+    public TransactionDetails(
+            String transactionId,
+            String responseCode,
+            String approvalRefNo,
+            String status,
+            String transactionRefId,
+            String amount
+    ) {
         this.transactionId = transactionId;
         this.responseCode = responseCode;
         this.approvalRefNo = approvalRefNo;
         this.status = status;
         this.transactionRefId = transactionRefId;
+        this.amount = amount;
     }
 
     @Nullable
@@ -43,6 +52,11 @@ public class TransactionDetails {
         return transactionRefId;
     }
 
+    @Nullable
+    public String getAmount() {
+        return amount;
+    }
+
     @NonNull
     @Override
     public String toString() {
@@ -50,7 +64,7 @@ public class TransactionDetails {
                 ", responseCode:" + responseCode +
                 ", transactionRefId:" + transactionRefId +
                 ", approvalRefNo:" + approvalRefNo +
-                ", status:" + status;
-
+                ", status:" + status +
+                ", amount:" + amount;
     }
 }

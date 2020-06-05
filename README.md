@@ -41,7 +41,7 @@ In your `build.gradle` file of app module, add below dependency to import this l
 
 ```gradle
     dependencies {
-        implementation 'com.shreyaspatil:EasyUpiPayment:2.1'
+        implementation 'com.shreyaspatil:EasyUpiPayment:2.2'
     }
 ```
 
@@ -111,7 +111,9 @@ You can see below code, these are minimum and mandatory calls to enable payment 
   </tr>
 </table>
 
-#### App-Specific Payment
+---
+
+#### App-Specific Payment (Optional)
 If you want to pay only with specific app like BHIM UPI, PhonePe, PayTm, etc. Then you can use method `setDefaultPaymentApp()` of `EasyUpiPayment`.
 
 Following ENUM can be passed to this method.
@@ -128,11 +130,15 @@ easyUpiPayment.setDefaultPaymentApp(PaymentApp.BHIM_UPI);
 
 After this while payment, this app will be opened for transaction.
 
+--- 
+
 #### Proceed to Payment
 To start the payment, just call `startPayment()` method of EasyUpiPayment and after that transaction is started.
 ```java
       easyUpiPayment.startPayment();
 ```
+
+--- 
 
 #### Event Callback Listeners
 To register for callback events, you will have to set `PaymentStatusListener` with `EasyUpiPayment` as below.
@@ -226,9 +232,13 @@ To get details, below method of `TransactionDetails` are useful :
     <td>getTransactionRefId()</td>
     <td>Returns Transaction reference ID passed in input</td>
   </tr>
+  <tr>
+    <td>getAmount()</td>
+    <td>Returns Transaction amount</td>
+  </tr>
 </table>
 
-Hurrah.... We have successfully implemented UPI integration in our Android app.
+Thus, We have successfully implemented UPI integration in our Android app.
 Thank You!
 
 ## Contribute

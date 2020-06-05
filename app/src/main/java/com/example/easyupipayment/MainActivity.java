@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private EditText fieldDescription;
     private EditText fieldAmount;
 
+    private EasyUpiPayment mEasyUpiPayment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         RadioButton paymentAppChoice = findViewById(radioAppChoice.getCheckedRadioButtonId());
 
         // START PAYMENT INITIALIZATION
-        EasyUpiPayment mEasyUpiPayment = new EasyUpiPayment.Builder()
+        mEasyUpiPayment = new EasyUpiPayment.Builder()
                 .with(this)
                 .setPayeeVpa(payeeVpa)
                 .setPayeeName(payeeName)
@@ -162,5 +164,11 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     @Override
     public void onAppNotFound() {
         Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mEasyUpiPayment.detachListener();
     }
 }

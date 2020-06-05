@@ -16,8 +16,9 @@ import com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity;
  * Class to implement Easy UPI Payment
  * Use {@link Builder} to create a new instance.
  */
+@SuppressWarnings("unused")
 public final class EasyUpiPayment {
-    public static final String APP_NOT_FOUND = "AppNotFound";
+    public static final String TAG = EasyUpiPayment.class.getSimpleName();
     private Activity mActivity;
     private Payment mPayment;
 
@@ -39,7 +40,7 @@ public final class EasyUpiPayment {
 
             // If app isn't exist, throw error and return
             if (!isInstalled) {
-                Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
+                Log.e(TAG, "UPI App with package '" + mPayment.getDefaultPackage() +
                         "' is not installed on this device.");
 
                 // Listener Callback
@@ -52,7 +53,7 @@ public final class EasyUpiPayment {
 
         // Create Payment Activity Intent
         Intent payIntent = new Intent(mActivity, PaymentUiActivity.class);
-        payIntent.putExtra("payment", mPayment);
+        payIntent.putExtra(PaymentUiActivity.EXTRA_KEY_PAYMENT, mPayment);
 
         // Start Payment Activity
         mActivity.startActivity(payIntent);
@@ -85,7 +86,7 @@ public final class EasyUpiPayment {
         }
         // If app isn't exist, log error and return
         if (!isInstalled) {
-            Log.e(APP_NOT_FOUND, "UPI App with package '" + mPayment.getDefaultPackage() +
+            Log.e(TAG, "UPI App with package '" + mPayment.getDefaultPackage() +
                     "' is not installed on this device.");
 
             // Listener Callback
@@ -132,7 +133,7 @@ public final class EasyUpiPayment {
         if (mPayment.getDefaultPackage() != null) {
             return !isPackageInstalled(mPayment.getDefaultPackage(), mActivity.getPackageManager());
         } else {
-            Log.w("Unpecified", "Default app is not speified. Specify it using " +
+            Log.w(TAG, "Default app is not specified. Specify it using " +
                     "'setDefaultApp()' method of Builder class");
             return false;
         }
@@ -277,7 +278,7 @@ public final class EasyUpiPayment {
         @NonNull
         public EasyUpiPayment build() {
             if (activity == null) {
-                throw new IllegalStateException("Activity must be specified using with() call begore build()");
+                throw new IllegalStateException("Activity must be specified using with() call before build()");
             }
 
             if (payment == null) {
