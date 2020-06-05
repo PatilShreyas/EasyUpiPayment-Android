@@ -1,11 +1,9 @@
 package com.shreyaspatil.EasyUpiPayment.ui;
 
 import android.content.Intent;
-import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,15 +14,18 @@ import com.shreyaspatil.EasyUpiPayment.model.Payment;
 import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static com.shreyaspatil.EasyUpiPayment.EasyUpiPayment.APP_NOT_FOUND;
 
 public final class PaymentUiActivity extends AppCompatActivity {
+
     public static final int PAYMENT_REQUEST = 4400;
-    private static final String TAG = "PaymentUiActivity";
+    public static final String EXTRA_KEY_PAYMENT = "payment";
+    private static final String TAG = PaymentUiActivity.class.getSimpleName();
+
     private Singleton singleton;
+    private Payment payment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +35,9 @@ public final class PaymentUiActivity extends AppCompatActivity {
         // Get instance of Singleton class
         singleton = Singleton.getInstance();
 
-        //Get Payment Information
+        // Get Payment Information
         Intent intent = getIntent();
-        Payment payment = (Payment) intent.getSerializableExtra("payment");
+        payment = (Payment) intent.getSerializableExtra(EXTRA_KEY_PAYMENT);
 
         // Set Parameters for UPI
         Uri.Builder payUri = new Uri.Builder();
@@ -55,7 +56,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
         payUri.appendQueryParameter("am", payment.getAmount());
         payUri.appendQueryParameter("cu", payment.getCurrency());
 
-        //Build URI
+        // Build URI
         Uri uri = payUri.build();
 
         // Set Data Intent
@@ -67,30 +68,17 @@ public final class PaymentUiActivity extends AppCompatActivity {
             paymentIntent.setPackage(payment.getDefaultPackage());
         }
 
+        // Show Dialog to user
+        Intent appChooser = Intent.createChooser(paymentIntent, "Pay using");
+
         // Check if other UPI apps are exists or not.
         if (paymentIntent.resolveActivity(getPackageManager()) != null) {
-            List<ResolveInfo> intentList = getPackageManager()
-                    .queryIntentActivities(paymentIntent, 0);
-            showApps(intentList, paymentIntent);
+            startActivityForResult(appChooser, PAYMENT_REQUEST);
         } else {
             Toast.makeText(this, "No UPI app found! Please Install to Proceed!",
                     Toast.LENGTH_SHORT).show();
             callbackOnAppNotFound();
         }
-    }
-
-    private void showApps(List<ResolveInfo> appsList, final Intent intent) {
-        //Listener to know about cancellation of payment
-        View.OnClickListener onCancelListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                callbackTransactionCancelled();
-                finish();
-            }
-        };
-
-        AppsBottomSheet appsBottomSheet = new AppsBottomSheet(appsList, intent, onCancelListener);
-        appsBottomSheet.show(getSupportFragmentManager(), "Pay Using");
     }
 
     @Override
@@ -103,7 +91,7 @@ public final class PaymentUiActivity extends AppCompatActivity {
 
                 if (response == null) {
                     callbackTransactionCancelled();
-                    Log.d(TAG, "Response is null");
+                    Log.d(TAG, "Payment Response is null");
 
                 } else {
                     try {
@@ -113,11 +101,12 @@ public final class PaymentUiActivity extends AppCompatActivity {
                         // Update Listener onTransactionCompleted()
                         callbackTransactionComplete(transactionDetails);
 
-                        // Check if success, submitted or failed
+                        String status = transactionDetails.getStatus().toLowerCase();
 
-                        if (transactionDetails.getStatus().toLowerCase().equals("success")) {
+                        // Check if success, submitted or failed
+                        if (status.equals("success")) {
                             callbackTransactionSuccess();
-                        } else if (transactionDetails.getStatus().toLowerCase().equals("submitted")) {
+                        } else if (status.equals("submitted")) {
                             callbackTransactionSubmitted();
                         } else {
                             callbackTransactionFailed();
@@ -161,7 +150,8 @@ public final class PaymentUiActivity extends AppCompatActivity {
                 responseCode,
                 approvalRefNo,
                 status,
-                transactionRefId
+                transactionRefId,
+                payment.getAmount()
         );
     }
 
