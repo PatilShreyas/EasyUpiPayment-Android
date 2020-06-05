@@ -5,7 +5,7 @@
     <application>
         <activity
             android:name="com.shreyaspatil.EasyUpiPayment.ui.PaymentUiActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 
 </manifest>
