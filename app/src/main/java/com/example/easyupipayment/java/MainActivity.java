@@ -1,8 +1,7 @@
-package com.example.easyupipayment;
+package com.example.easyupipayment.java;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -13,10 +12,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.shreyaspatil.EasyUpiPayment.EasyUpiPayment;
-import com.shreyaspatil.EasyUpiPayment.listener.PaymentStatusListener;
-import com.shreyaspatil.EasyUpiPayment.model.PaymentApp;
-import com.shreyaspatil.EasyUpiPayment.model.TransactionDetails;
+import com.example.easyupipayment.R;
+import com.shreyaspatil.easyupipayment.EasyUpiPayment;
+import com.shreyaspatil.easyupipayment.exception.AppNotFoundException;
+import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener;
+import com.shreyaspatil.easyupipayment.model.PaymentApp;
+import com.shreyaspatil.easyupipayment.model.TransactionDetails;
 
 public class MainActivity extends AppCompatActivity implements PaymentStatusListener {
 
@@ -35,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private EditText fieldDescription;
     private EditText fieldAmount;
 
-    private EasyUpiPayment mEasyUpiPayment;
+    private EasyUpiPayment easyUpiPayment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +45,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
         initViews();
 
-        payButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pay();
-            }
-        });
+        payButton.setOnClickListener(v -> pay());
     }
 
     private void initViews() {
@@ -80,50 +76,56 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         String amount = fieldAmount.getText().toString();
         RadioButton paymentAppChoice = findViewById(radioAppChoice.getCheckedRadioButtonId());
 
+        PaymentApp paymentApp;
+
+        switch (paymentAppChoice.getId()) {
+            case R.id.app_default:
+                paymentApp = PaymentApp.ALL;
+                break;
+            case R.id.app_amazonpay:
+                paymentApp = PaymentApp.AMAZON_PAY;
+                break;
+            case R.id.app_bhim_upi:
+                paymentApp = PaymentApp.BHIM_UPI;
+                break;
+            case R.id.app_google_pay:
+                paymentApp = PaymentApp.GOOGLE_PAY;
+                break;
+            case R.id.app_phonepe:
+                paymentApp = PaymentApp.PHONE_PE;
+                break;
+            case R.id.app_paytm:
+                paymentApp = PaymentApp.PAYTM;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + paymentAppChoice.getId());
+        }
+
+
         // START PAYMENT INITIALIZATION
-        mEasyUpiPayment = new EasyUpiPayment.Builder()
-                .with(this)
+        EasyUpiPayment.Builder builder = new EasyUpiPayment.Builder(this)
+                .with(paymentApp)
                 .setPayeeVpa(payeeVpa)
                 .setPayeeName(payeeName)
                 .setTransactionId(transactionId)
                 .setTransactionRefId(transactionRefId)
                 .setDescription(description)
-                .setAmount(amount)
-                .build();
-
-        // Register Listener for Events
-        mEasyUpiPayment.setPaymentStatusListener(this);
-
-        switch (paymentAppChoice.getId()) {
-            case R.id.app_default:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.NONE);
-                break;
-            case R.id.app_amazonpay:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.AMAZON_PAY);
-                break;
-            case R.id.app_bhim_upi:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.BHIM_UPI);
-                break;
-            case R.id.app_google_pay:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.GOOGLE_PAY);
-                break;
-            case R.id.app_phonepe:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.PHONE_PE);
-                break;
-            case R.id.app_paytm:
-                mEasyUpiPayment.setDefaultPaymentApp(PaymentApp.PAYTM);
-                break;
-        }
-
-        // Check if app exists or not
-        if (mEasyUpiPayment.isDefaultAppExist()) {
-            onAppNotFound();
-            return;
-        }
+                .setAmount(amount);
         // END INITIALIZATION
 
-        // START PAYMENT
-        mEasyUpiPayment.startPayment();
+        try {
+            // Build instance
+            easyUpiPayment = builder.build();
+
+            // Register Listener for Events
+            easyUpiPayment.setPaymentStatusListener(this);
+
+            // Start payment / transaction
+            easyUpiPayment.startPayment();
+        } catch (AppNotFoundException exception) {
+            exception.printStackTrace();
+            toast("Error:" + exception.getMessage());
+        }
     }
 
     @Override
@@ -131,44 +133,55 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         // Transaction Completed
         Log.d("TransactionDetails", transactionDetails.toString());
         statusView.setText(transactionDetails.toString());
-    }
 
-    @Override
-    public void onTransactionSuccess() {
-        // Payment Success
-        Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
-        imageView.setImageResource(R.drawable.ic_success);
-    }
-
-    @Override
-    public void onTransactionSubmitted() {
-        // Payment Pending
-        Toast.makeText(this, "Pending | Submitted", Toast.LENGTH_SHORT).show();
-        imageView.setImageResource(R.drawable.ic_success);
-    }
-
-    @Override
-    public void onTransactionFailed() {
-        // Payment Failed
-        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
-        imageView.setImageResource(R.drawable.ic_failed);
+        switch (transactionDetails.getTransactionStatus()) {
+            case SUCCESS:
+                onTransactionSuccess();
+                break;
+            case FAILURE:
+                onTransactionFailed();
+                break;
+            case SUBMITTED:
+                onTransactionSubmitted();
+                break;
+        }
     }
 
     @Override
     public void onTransactionCancelled() {
         // Payment Cancelled by User
-        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+        toast("Cancelled by user");
         imageView.setImageResource(R.drawable.ic_failed);
     }
 
-    @Override
-    public void onAppNotFound() {
-        Toast.makeText(this, "App Not Found", Toast.LENGTH_SHORT).show();
+    private void onTransactionSuccess() {
+        // Payment Success
+        toast("Success");
+        imageView.setImageResource(R.drawable.ic_success);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mEasyUpiPayment.detachListener();
+    private void onTransactionSubmitted() {
+        // Payment Pending
+        toast("Pending | Submitted");
+        imageView.setImageResource(R.drawable.ic_success);
     }
+
+    private void onTransactionFailed() {
+        // Payment Failed
+        toast("Failed");
+        imageView.setImageResource(R.drawable.ic_failed);
+    }
+
+    private void toast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+
+//    Uncomment this if you have inherited [android.app.Activity] and not [androidx.appcompat.app.AppCompatActivity]
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        easyUpiPayment.removePaymentStatusListener();
+//    }
 }
