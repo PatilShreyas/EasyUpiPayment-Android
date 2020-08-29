@@ -90,28 +90,28 @@ class EasyUpiPayment constructor(
 	class Builder(private val activity: Activity) {
 
 		@set:JvmSynthetic
-		lateinit var paymentApp: PaymentApp
+		var paymentApp: PaymentApp = PaymentApp.ALL
 
 		@set:JvmSynthetic
-		lateinit var payeeVpa: String
+		var payeeVpa: String? = null
 
 		@set:JvmSynthetic
-		lateinit var payeeName: String
+		var payeeName: String? = null
 
 		@set:JvmSynthetic
 		var payeeMerchantCode: String? = null
 
 		@set:JvmSynthetic
-		lateinit var transactionId: String
+		var transactionId: String? = null
 
 		@set:JvmSynthetic
-		lateinit var transactionRefId: String
+		var transactionRefId: String? = null
 
 		@set:JvmSynthetic
-		lateinit var description: String
+		var description: String? = null
 
 		@set:JvmSynthetic
-		lateinit var amount: String
+		var amount: String? = null
 
 		/**
 		 * Sets default payment app for transaction.
@@ -133,12 +133,7 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setPayeeVpa(vpa: String): Builder = apply {
-			check(vpa.contains("@")) {
-				"Payee VPA address should be valid (For e.g. example@vpa)"
-			}
-			payeeVpa = vpa
-		}
+		fun setPayeeVpa(vpa: String): Builder = apply { payeeVpa = vpa }
 
 		/**
 		 * Sets the Payee Name.
@@ -147,10 +142,7 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setPayeeName(name: String): Builder = apply {
-			check(name.isNotBlank()) { "Payee Name Should be Valid!" }
-			payeeName = name
-		}
+		fun setPayeeName(name: String): Builder = apply { payeeName = name }
 
 		/**
 		 * Sets the Merchant Code. If present it should be passed.
@@ -160,7 +152,6 @@ class EasyUpiPayment constructor(
 		 * @return this, for chaining.
 		 */
 		fun setPayeeMerchantCode(merchantCode: String): Builder = apply {
-			check(merchantCode.isNotBlank()) { "Merchant Code Should be Valid!" }
 			this.payeeMerchantCode = merchantCode
 		}
 
@@ -171,10 +162,7 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setTransactionId(id: String): Builder = apply {
-			check(id.isNotBlank()) { "Transaction ID Should be Valid!" }
-			this.transactionId = id
-		}
+		fun setTransactionId(id: String): Builder = apply { this.transactionId = id }
 
 		/**
 		 * Sets the Transaction Reference ID. Transaction reference ID. This could be order number,
@@ -185,10 +173,7 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setTransactionRefId(refId: String): Builder = apply {
-			check(refId.isNotBlank()) { "RefId Should be Valid!" }
-			this.transactionRefId = refId
-		}
+		fun setTransactionRefId(refId: String): Builder = apply { this.transactionRefId = refId }
 
 		/**
 		 * Sets the Description. It have to provide valid small note or description about payment.
@@ -199,10 +184,7 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setDescription(description: String): Builder = apply {
-			check(description.isNotBlank()) { "Description Should be Valid!" }
-			this.description = description
-		}
+		fun setDescription(description: String): Builder = apply { this.description = description }
 
 		/**
 		 * Sets the Amount in INR. (Format should be decimal e.g. 14.88)
@@ -212,43 +194,73 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return this, for chaining.
 		 */
-		fun setAmount(amount: String): Builder = apply {
-			check(amount.matches("""\d+\.\d*""".toRegex())) {
-				"Amount should be valid positive number and in decimal format XX.XX (For e.g. 100.00)"
-			}
-			this.amount = amount
-		}
+		fun setAmount(amount: String): Builder = apply { this.amount = amount }
 
 		/**
 		 * Build the [EasyUpiPayment] object.
 		 */
 		@Throws(IllegalStateException::class, AppNotFoundException::class)
 		fun build(): EasyUpiPayment {
+			validate()
+
+			val payment = Payment(
+				currency = "INR",
+				vpa = payeeVpa!!,
+				name = payeeName!!,
+				payeeMerchantCode = payeeMerchantCode,
+				txnId = transactionId!!,
+				txnRefId = transactionRefId!!,
+				description = description!!,
+				amount = amount!!,
+				defaultPackage = if (paymentApp != PaymentApp.ALL) paymentApp.packageName else null
+			)
+			return EasyUpiPayment(activity, payment)
+		}
+
+		private fun validate() {
 			if (paymentApp != PaymentApp.ALL) {
 				if (isPackageInstalled(paymentApp.packageName)) {
 					throw AppNotFoundException(paymentApp.packageName)
 				}
 			}
 
-			check(this::payeeVpa.isInitialized) { "Must call setPayeeVpa() before build()." }
-			check(this::transactionId.isInitialized) { "Must call setTransactionId() before build" }
-			check(this::transactionRefId.isInitialized) { "Must call setTransactionRefId() before build" }
-			check(this::payeeName.isInitialized) { "Must call setPayeeName() before build()." }
-			check(this::amount.isInitialized) { "Must call setAmount() before build()." }
-			check(this::description.isInitialized) { "Must call setDescription() before build()." }
+			payeeVpa.run {
+				checkNotNull(this) { "Must call setPayeeVpa() before build()." }
+				check(this.matches("""^[\w-.]+@([\w-])+""".toRegex())) {
+					"Payee VPA address should be valid (For e.g. example@vpa)"
+				}
+			}
 
-			val payment = Payment(
-				currency = "INR",
-				vpa = payeeVpa,
-				name = payeeName,
-				payeeMerchantCode = payeeMerchantCode,
-				txnId = transactionId,
-				txnRefId = transactionRefId,
-				description = description,
-				amount = amount,
-				defaultPackage = if (paymentApp != PaymentApp.ALL) paymentApp.packageName else null
-			)
-			return EasyUpiPayment(activity, payment)
+			payeeMerchantCode?.let {
+				check(it.isNotBlank()) { "Merchant Code Should be Valid!" }
+			}
+
+			transactionId.run {
+				checkNotNull(this) { "Must call setTransactionId() before build" }
+				check(this.isNotBlank()) { "Transaction ID Should be Valid!" }
+			}
+
+			transactionRefId.run {
+				checkNotNull(this) { "Must call setTransactionRefId() before build" }
+				check(this.isNotBlank()) { "RefId Should be Valid!" }
+			}
+
+			payeeName.run {
+				checkNotNull(this) { "Must call setPayeeName() before build()." }
+				check(this.isNotBlank()) { "Payee name Should be Valid!" }
+			}
+
+			amount.run {
+				checkNotNull(this) { "Must call setAmount() before build()." }
+				check(this.matches("""\d+\.\d*""".toRegex())) {
+					"Amount should be valid positive number and in decimal format (For e.g. 100.00)"
+				}
+			}
+
+			description.run {
+				checkNotNull(this) { "Must call setDescription() before build()." }
+				check(this.isNotBlank()) { "Description Should be Valid!" }
+			}
 		}
 
 		/**
