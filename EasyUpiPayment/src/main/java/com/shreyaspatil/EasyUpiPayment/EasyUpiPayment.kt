@@ -3,6 +3,7 @@ package com.shreyaspatil.easyupipayment
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -25,8 +26,20 @@ class EasyUpiPayment constructor(
 	private val mPayment: Payment
 ) {
 
+	@VisibleForTesting
+	@get:JvmSynthetic
+	internal lateinit var activityLifecycleObserver: LifecycleObserver
+
 	init {
 		if (mActivity is AppCompatActivity) {
+			activityLifecycleObserver = object : LifecycleObserver {
+				@OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+				fun onDestroyed() {
+					Log.d(TAG, "onDestroyed")
+					Singleton.listener = null
+				}
+			}
+
 			registerLifecycleObserver(mActivity)
 		} else {
 			Log.w(TAG, """
@@ -70,18 +83,7 @@ class EasyUpiPayment constructor(
 	 * Registers lifecycle observer for [mLifecycleOwner]
 	 */
 	private fun registerLifecycleObserver(mLifecycleOwner: LifecycleOwner) {
-		mLifecycleOwner.lifecycle.addObserver(ActivityLifecycleObserver)
-	}
-
-	/**
-	 * Automatically removes listener once Lifecycle is stopped or destroyed
-	 */
-	private object ActivityLifecycleObserver : LifecycleObserver {
-		@OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-		fun onDestroyed() {
-			Log.d(TAG, "onDestroyed")
-			Singleton.listener = null
-		}
+		mLifecycleOwner.lifecycle.addObserver(activityLifecycleObserver)
 	}
 
 	/**
@@ -268,8 +270,11 @@ class EasyUpiPayment constructor(
 		 *
 		 * @return true if app exists, otherwise false.
 		 */
-		private fun isPackageInstalled(packageName: String): Boolean = runCatching {
-			activity.packageManager.getPackageInfo(packageName, 0) != null
+		@VisibleForTesting
+		@JvmSynthetic
+		internal fun isPackageInstalled(packageName: String): Boolean = runCatching {
+			activity.packageManager.getPackageInfo(packageName, 0)
+			true
 		}.getOrDefault(false)
 	}
 
