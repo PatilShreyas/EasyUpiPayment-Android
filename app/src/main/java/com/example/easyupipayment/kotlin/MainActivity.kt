@@ -6,7 +6,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.easyupipayment.R
 import com.shreyaspatil.easyupipayment.EasyUpiPayment
-import com.shreyaspatil.easyupipayment.exception.AppNotFoundException
 import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
 import com.shreyaspatil.easyupipayment.model.PaymentApp
 import com.shreyaspatil.easyupipayment.model.TransactionDetails
@@ -20,6 +19,14 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_main)
+
+		initViews()
+	}
+
+	private fun initViews() {
+		val transactionId = "TID" + System.currentTimeMillis()
+		field_transaction_id.setText(transactionId)
+		field_transaction_ref_id.setText(transactionId)
 
 		// Setup click listener for Pay button
 		button_pay.setOnClickListener { pay() }
@@ -44,7 +51,7 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 			else -> throw IllegalStateException("Unexpected value: " + paymentAppChoice.id)
 		}
 
-		try {
+		runCatching {
 			// START PAYMENT INITIALIZATION
 			easyUpiPayment = EasyUpiPayment(this) {
 				this.paymentApp = paymentApp
@@ -62,9 +69,9 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 
 			// Start payment / transaction
 			easyUpiPayment.startPayment()
-		} catch (exception: AppNotFoundException) {
-			exception.printStackTrace()
-			toast("Error:" + exception.message)
+		}.getOrElse {
+			it.printStackTrace()
+			toast("Error: ${it.message}")
 		}
 	}
 

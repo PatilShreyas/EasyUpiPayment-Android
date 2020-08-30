@@ -14,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.easyupipayment.R;
 import com.shreyaspatil.easyupipayment.EasyUpiPayment;
-import com.shreyaspatil.easyupipayment.exception.AppNotFoundException;
 import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener;
 import com.shreyaspatil.easyupipayment.model.PaymentApp;
 import com.shreyaspatil.easyupipayment.model.TransactionDetails;
@@ -122,9 +121,9 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
             // Start payment / transaction
             easyUpiPayment.startPayment();
-        } catch (AppNotFoundException exception) {
+        } catch (Exception exception) {
             exception.printStackTrace();
-            toast("Error:" + exception.getMessage());
+            toast("Error: " + exception.getMessage());
         }
     }
 
