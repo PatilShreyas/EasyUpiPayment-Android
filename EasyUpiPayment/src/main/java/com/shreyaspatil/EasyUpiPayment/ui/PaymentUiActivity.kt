@@ -16,10 +16,9 @@ import java.util.*
 
 class PaymentUiActivity : AppCompatActivity() {
 
-	lateinit var payment: Payment
+	private lateinit var payment: Payment
 
-	public override fun onCreate(savedInstanceState: Bundle?) {
-		println("I'm Here")
+	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_upipay)
 
