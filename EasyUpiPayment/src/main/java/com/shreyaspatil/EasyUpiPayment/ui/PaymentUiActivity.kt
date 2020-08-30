@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.shreyaspatil.EasyUpiPayment.R
+import com.shreyaspatil.easyupipayment.R
 import com.shreyaspatil.easyupipayment.Singleton
 import com.shreyaspatil.easyupipayment.exception.AppNotFoundException
 import com.shreyaspatil.easyupipayment.model.Payment
@@ -16,15 +16,15 @@ import java.util.*
 
 class PaymentUiActivity : AppCompatActivity() {
 
-	private lateinit var payment: Payment
+	lateinit var payment: Payment
 
-	override fun onCreate(savedInstanceState: Bundle?) {
+	public override fun onCreate(savedInstanceState: Bundle?) {
+		println("I'm Here")
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_upipay)
 
 		payment = (intent.getSerializableExtra(EXTRA_KEY_PAYMENT) as Payment?)
 			?: throw IllegalStateException("Unable to parse payment details")
-
 
 		// Set Parameters for UPI
 		val paymentUri = Uri.Builder().apply {
@@ -96,7 +96,8 @@ class PaymentUiActivity : AppCompatActivity() {
 	}
 
 	// Make TransactionDetails object from response string
-	private fun getTransactionDetails(response: String): TransactionDetails {
+	@JvmSynthetic
+	internal fun getTransactionDetails(response: String): TransactionDetails {
 		return with(getMapFromQuery(response)) {
 			TransactionDetails(
 				transactionId = get("txnId"),
@@ -112,7 +113,8 @@ class PaymentUiActivity : AppCompatActivity() {
 		}
 	}
 
-	private fun getMapFromQuery(queryString: String): Map<String, String> {
+	@JvmSynthetic
+	internal fun getMapFromQuery(queryString: String): Map<String, String> {
 		val map = mutableMapOf<String, String>()
 		val keyValuePairs = queryString
 			.split("&")
@@ -123,16 +125,19 @@ class PaymentUiActivity : AppCompatActivity() {
 		return map
 	}
 
-	private fun throwOnAppNotFound() {
+	@JvmSynthetic
+	internal fun throwOnAppNotFound() {
 		Log.e(TAG, "No UPI app found on device.")
 		throw AppNotFoundException(payment.defaultPackage)
 	}
 
-	private fun callbackTransactionCancelled() {
+	@JvmSynthetic
+	internal fun callbackTransactionCancelled() {
 		Singleton.listener?.onTransactionCancelled()
 	}
 
-	private fun callbackTransactionCompleted(transactionDetails: TransactionDetails) {
+	@JvmSynthetic
+	internal fun callbackTransactionCompleted(transactionDetails: TransactionDetails) {
 		Singleton.listener?.onTransactionCompleted(transactionDetails)
 	}
 
