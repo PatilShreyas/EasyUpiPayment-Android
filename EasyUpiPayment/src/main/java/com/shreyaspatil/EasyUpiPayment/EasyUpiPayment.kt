@@ -221,7 +221,7 @@ class EasyUpiPayment constructor(
 
 		private fun validate() {
 			if (paymentApp != PaymentApp.ALL) {
-				if (isPackageInstalled(paymentApp.packageName)) {
+				if (!isPackageInstalled(paymentApp.packageName)) {
 					throw AppNotFoundException(paymentApp.packageName)
 				}
 			}
