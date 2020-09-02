@@ -43,10 +43,12 @@ To get details, below method of TransactionDetails are useful:
   </tr>
 </table>
 
----
+## Transaction State
 
 In *TransactionStatus*, you'll get ENUM among `SUBMITTED`, `SUCCESS` and `FAILURE`. Their meaning is:
 
-- `TransactionStatus.SUBMITTED` - Transaction is in ***PENDING*** state. Money might deducted from user's account but not deposited in payee's account.
-- `TransactionStatus.SUCCESS` - Transaction is successful.
-- `TransactionStatus.FAILED` - Transaction is failed.
+| Status Enum                   | Meaning                                                          |
+| ----------------------------- | ---------------------------------------------------------------- |
+| `TransactionStatus.SUBMITTED` | 🟡 Transaction is in ***PENDING*** state. Money might deducted from user's account but not deposited in payee's account.     |
+| `TransactionStatus.SUCCESS`   | 🟢 Transaction is successful. |
+| `TransactionStatus.FAILED`    | 🔴 Transaction is failed.     |

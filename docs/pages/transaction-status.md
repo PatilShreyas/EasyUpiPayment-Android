@@ -6,8 +6,10 @@ You'll need to register for callback events to get transaction status or details
 
 ## Payment Status Listener callback methods
 
-- `onTransactionCompleted(TransactionDetails)` - Invoked when transaction is over. You'll get `TransactionDetails` instance which will include transaction details. See [this](pages/transaction-details) for more information.
-- `onTransactionCancelled()` - Invoked when transaction is cancelled by the user.
+| Callback                                     | Meaning                                                          |
+| -------------------------------------------- | ---------------------------------------------------------------- |
+| `onTransactionCompleted(TransactionDetails)` | Invoked when transaction is over. You'll get `TransactionDetails` instance which will include transaction details. See [this](pages/transaction-details) for more information.   
+| `onTransactionCancelled()`                   | Invoked when transaction is cancelled by the user. |
 
 <!-- tabs:start -->
 

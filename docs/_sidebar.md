@@ -1,9 +1,10 @@
 - [Introduction](/)
 - [Getting Started](/pages/getting-started)
-- [Setup Payment](/pages/setup-payment-info)
+- Setup Payment
     - [Setup Payment Information](/pages/setup-payment-info)
     - [Payment using specific app](/pages/pay-with-app)
     - [Initiate Payment](/pages/initiate-payment)
+- Getting Transaction Details
     - [Transaction Status](/pages/transaction-status)
     - [Transaction Details](/pages/transaction-details)
 - [Changelog](/pages/changelog)

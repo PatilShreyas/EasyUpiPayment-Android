@@ -17,10 +17,21 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/dracula-prism/css/dracula-prism.css"
+    />
 
     <style>
       :root {
+        /* Cover */
         --cover-background-color: #00796b;
+
+        /* Table */
+        --table-body-border-color: #00796b;
+        --table-body-border-width: 1px;
+        --table-cell-border-color: #00796b;
+        --table-head-border-width: 1px;
       }
     </style>
   </head>
@@ -34,7 +45,13 @@
         subMaxLevel: 3,
         coverpage: true,
         loadSidebar: true,
-        auto2top: true
+        auto2top: true,
+        pagination: {
+          previousText: "Previous",
+          nextText: "Next",
+          crossChapter: true,
+          crossChapterText: true,
+        },
       };
     </script>
     <script src="//cdn.jsdelivr.net/npm/docsify/lib/docsify.js"></script>
