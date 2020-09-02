@@ -1,5 +1,11 @@
 - [Introduction](/)
 - [Getting Started](/pages/getting-started)
+- [Setup Payment](/pages/setup-payment-info)
+    - [Setup Payment Information](/pages/setup-payment-info)
+    - [Payment using specific app](/pages/pay-with-app)
+    - [Initiate Payment](/pages/initiate-payment)
+    - [Transaction Status](/pages/transaction-status)
+    - [Transaction Details](/pages/transaction-details)
 - [Changelog](/pages/changelog)
 - **Links**
 - [![Example Code](https://icongr.am/feather/code.svg?size=16&color=808080)Example Code](https://github.com/PatilShreyas/EasyUpiPayment-Android/tree/master/app)
