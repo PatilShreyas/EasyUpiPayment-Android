@@ -4,7 +4,7 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 
 ---
 
-## *v3.0.0* (2020-09-XX)
+## *v3.0.0* (2020-09-04)
 
 - Moved to [symantic versioning](https://semver.org/) from this release.
 - Migrated project codebase to the [Kotlin](https://kotlinlang.org).
