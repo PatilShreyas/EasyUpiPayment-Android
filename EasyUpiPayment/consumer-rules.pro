@@ -1,0 +1,1 @@
+-keepclasseswithmembernames public class com.shreyaspatil.easyupipayment.model.** {*;}
