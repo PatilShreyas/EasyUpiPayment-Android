@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="images/icon.png" height="128" />
+    <img src="images/icon.png" height="256" />
 </p>
 
 # Easy UPI Payment - Android Library 📱💳
@@ -10,6 +10,9 @@
 ### [Visit official documentation for the details](http://patilshreyas.github.io/easyupipayment-android)
 
 ---
+
+## Demo application
+See [these code examples in `/app` module](/app) of this repository. Example implementations are available in both Java and Kotlin programming languages.
 
 ## Contribute
 We can collaboratively make it happen. So if you have any issues, new ideas about implementations then just raise issue and we are open for Pull Requests. Improve and make it happen.
