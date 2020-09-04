@@ -7,7 +7,7 @@
 ![GitHub forks](https://img.shields.io/github/forks/PatilShreyas/EasyUpiPayment-Android?style=square)
 ![GitHub watchers](https://img.shields.io/github/watchers/PatilShreyas/EasyUpiPayment-Android?style=square)
 
-![SocialPreview](https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/Screenshots-Demo/GitHub-SocialPreview.png)
+![SocialPreview](https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/GitHub-SocialPreview.png)
 
 Welcome! If you want to integrate UPI payments in Android app then you're at right place.
 
@@ -41,9 +41,9 @@ Below sequence diagram will help you to understand sequence of events happening 
     <th>4. Finish</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/Screenshots-Demo/EasyUpiPay1.png"/></td>
-    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/Screenshots-Demo/EasyUpiPay2.png"/></td> 
-    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/Screenshots-Demo/EasyUpiPay3.png"/></td>
-    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/Screenshots-Demo/EasyUpiPay4.png"/></td>
+    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/EasyUpiPay1.png"/></td>
+    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/EasyUpiPay2.png"/></td> 
+    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/EasyUpiPay3.png"/></td>
+    <td><img src="https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/EasyUpiPay4.png"/></td>
   </tr>
 </table>
