@@ -16,7 +16,7 @@ See [these code examples in `/app` module](/app) of this repository. Example imp
 
 You can download demo version of Android app from here
 
-[![EasyUpiPayment Demo App](https://img.shields.io/badge/EasyUpiPayment🍲-DemoAPK-red.svg?style=for-the-badge&logo=android)](https://raw.githubusercontent.com/PatilShreyas/EasyUpiPayment-Android/master/app/app-debug.apk)
+[![EasyUpiPayment Demo App](https://img.shields.io/badge/EasyUpiPaymentEXAMPLE-APK-red.svg?style=for-the-badge&logo=android)](https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/app/app-debug.apk)
 
 ## Contribute
 We can collaboratively make it happen. So if you have any issues, new ideas about implementations then just raise issue and we are open for Pull Requests. Improve and make it happen.
