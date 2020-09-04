@@ -37,7 +37,7 @@ val easyUpiPayment = EasyUpiPayment(this) {
 
 ```java
 EasyUpiPayment.Builder builder = new EasyUpiPayment.Builder(this)
-        .setPaymentApp(PaymentApp.BHIM_UPI)
+        .with(PaymentApp.BHIM_UPI)
 
         // Other fields initialization
 ```

@@ -6,8 +6,12 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 
 ## *v3.0.0* (2020-09-XX)
 
-- Moved to [symantic version](https://semver.org/) from this release.
-- // TODO add more info
+- Moved to [symantic versioning](https://semver.org/) from this release.
+- Migrated project codebase to the [Kotlin](https://kotlinlang.org).
+- Changed callback methods from `PaymentStatusListener`.
+- Introduces new method in `EasyUpiPayment.Builder` for setting specific app for payment.
+
+Visit documentation for more information about latest version.
 
 ## *v2.2* (2020-05-06)
 

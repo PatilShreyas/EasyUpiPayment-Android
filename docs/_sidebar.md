@@ -7,6 +7,7 @@
 - Getting Transaction Details
     - [Transaction Status](/pages/transaction-status)
     - [Transaction Details](/pages/transaction-details)
+- [End notes](/pages/finish)
 - [Changelog](/pages/changelog)
 - **Links**
 - [![Example Code](https://icongr.am/feather/code.svg?size=16&color=808080)Example Code](https://github.com/PatilShreyas/EasyUpiPayment-Android/tree/master/app)

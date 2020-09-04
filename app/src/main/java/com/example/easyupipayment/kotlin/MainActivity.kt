@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 			else -> throw IllegalStateException("Unexpected value: " + paymentAppChoice.id)
 		}
 
-		runCatching {
+		try {
 			// START PAYMENT INITIALIZATION
 			easyUpiPayment = EasyUpiPayment(this) {
 				this.paymentApp = paymentApp
@@ -69,9 +69,9 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 
 			// Start payment / transaction
 			easyUpiPayment.startPayment()
-		}.getOrElse {
-			it.printStackTrace()
-			toast("Error: ${it.message}")
+		} catch (e: Exception) {
+			e.printStackTrace()
+			toast("Error: ${e.message}")
 		}
 	}
 

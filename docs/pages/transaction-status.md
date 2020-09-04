@@ -11,6 +11,10 @@ You'll need to register for callback events to get transaction status or details
 | `onTransactionCompleted(TransactionDetails)` | Invoked when transaction is over. You'll get `TransactionDetails` instance which will include transaction details. See [this](pages/transaction-details) for more information.   
 | `onTransactionCancelled()`                   | Invoked when transaction is cancelled by the user. |
 
+---
+
+For reference, see below snippet
+
 <!-- tabs:start -->
 
 #### ** Kotlin **
@@ -31,7 +35,6 @@ override fun onTransactionCancelled() {
 @Override
 public void onTransactionCompleted(TransactionDetails transactionDetails) {
     Log.d("TransactionDetails", transactionDetails.toString());
-    }
 }
 
 @Override
