@@ -8,6 +8,6 @@
 - Easy Setup
 - Support almost used UPI apps.
 
-[Get Started](/pages/getting-started)
+[Get Started](/?id=easy-upi-payment-android-library)
 [GitHub](https://github.com/PatilShreyas/EasyUpiPayment-Android)
 [Bintray](https://bintray.com/beta/#/patilshreyas/maven/com.shreyaspatil:EasyUpiPayment?tab=overview)
