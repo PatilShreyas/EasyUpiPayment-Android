@@ -7,7 +7,7 @@
 ![Bintray](https://img.shields.io/bintray/v/patilshreyas/maven/com.shreyaspatil:EasyUpiPayment?style=flat-square)
 ![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg)
 
-### [Visit official documentation for the details](http://patilshreyas.github.io/easyupipayment-android)
+### [Visit official documentation for the details](https://eupipay-docs.netlify.app/)
 
 ---
 
