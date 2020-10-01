@@ -6,7 +6,7 @@
 
 - Simple and lightweight
 - Easy Setup
-- Support almost used UPI apps.
+- Supports almost all used UPI apps.
 
 [Get Started](/?id=easy-upi-payment-android-library)
 [GitHub](https://github.com/PatilShreyas/EasyUpiPayment-Android)
