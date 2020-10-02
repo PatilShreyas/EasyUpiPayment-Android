@@ -20,4 +20,4 @@ easyUpiPayment.startPayment();
 
 <!-- tabs:end -->
 
-You'll get Status of payment/transaction through callback/listener. Let's see about it in next section.
+You'll get Status of payment/transaction through callback/listener. Let's see about it in the next section.

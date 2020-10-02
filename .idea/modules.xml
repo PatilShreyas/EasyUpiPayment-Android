@@ -4,7 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EasyUPIPayment.iml" filepath="$PROJECT_DIR$/EasyUPIPayment.iml" group="EasyUPIPayment" />
       <module fileurl="file://$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" filepath="$PROJECT_DIR$/EasyUpiPayment/EasyUpiPayment.iml" group="EasyUPIPayment/EasyUpiPayment" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EasyUpiPayment-Android.iml" filepath="$PROJECT_DIR$/.idea/modules/EasyUpiPayment-Android.iml" group="EasyUpiPayment-Android" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/EasyUpiPayment-Android-app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/EasyUpiPayment-Android-app.iml" group="EasyUpiPayment-Android/app" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="EasyUPIPayment/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/EasyUpiPayment/com.shreyaspatil-EasyUpiPayment.iml" filepath="$PROJECT_DIR$/.idea/modules/EasyUpiPayment/com.shreyaspatil-EasyUpiPayment.iml" group="EasyUpiPayment-Android/EasyUpiPayment" />
     </modules>
   </component>
 </project>
