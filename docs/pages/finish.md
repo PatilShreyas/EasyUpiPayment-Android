@@ -1,10 +1,10 @@
 # End notes
 
-Okay! That's how it's easy to implement UPI payments in your Android mobile apps. 
+Okay! That's how easy it is to implement UPI payments in your Android mobile apps. 
 
 If you like it then consider [giving a 🌟 on GitHub](https://github.com/PatilShreyas/EasyUpiPayment-Android/) and show your love and support. 
 
-If you're facing any issues with this library then you can raise issue on Github.
+If you're facing any issues with this library then you can raise an issue on Github.
 
 ## Contributing
 

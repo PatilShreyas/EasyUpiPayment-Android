@@ -1,6 +1,6 @@
 # Setup Payment information
 
-To setup payment, make sure you're implementing in `Activity`. It's recommended to use _`AppCompatActivity`_ for some reasons [here](/).
+To setup a payment, make sure you're implementing in `Activity`. It's recommended to use _`AppCompatActivity`_ for some reasons [here](/).
 
 ## Initializing _EasyUpiPayment_
 

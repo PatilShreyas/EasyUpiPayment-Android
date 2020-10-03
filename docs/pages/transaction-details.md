@@ -1,6 +1,6 @@
 # Getting Transaction Details
 
-Once transaction is completed, `onTransactionCompleted()` gets invoked (as we seen in previous section). In that callback, you'll get instance of `TransactionDetails`. 
+Once the transaction is completed, `onTransactionCompleted()` gets invoked (as we seen in previous section). In that callback, you'll get instance of `TransactionDetails`. 
 
 `TransactionDetails` instance includes details about previously completed transaction.
 To get details, below method of TransactionDetails are useful:
@@ -49,6 +49,6 @@ In *TransactionStatus*, you'll get ENUM among `SUBMITTED`, `SUCCESS` and `FAILUR
 
 | Status Enum                   | Meaning                                                          |
 | ----------------------------- | ---------------------------------------------------------------- |
-| `TransactionStatus.SUBMITTED` | 🟡 Transaction is in ***PENDING*** state. Money might deducted from user's account but not deposited in payee's account.     |
+| `TransactionStatus.SUBMITTED` | 🟡 Transaction is in ***PENDING*** state. Money might get deducted from user's account but not deposited in payee's account.     |
 | `TransactionStatus.SUCCESS`   | 🟢 Transaction is successful. |
 | `TransactionStatus.FAILED`    | 🔴 Transaction is failed.     |

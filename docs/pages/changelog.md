@@ -32,7 +32,7 @@ When the transaction is completed then you can retrieve transaction amount as be
 
 This version fixes
 
-- App crashing when paying using BHIM UPI app ([#21](https://github.com/PatilShreyas/EasyUpiPayment-Android/issues/21)).
+- App crashes when paying using BHIM UPI app ([#21](https://github.com/PatilShreyas/EasyUpiPayment-Android/issues/21)).
 
 ## *v2.0* (2019-12-09)
 

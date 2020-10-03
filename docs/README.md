@@ -9,15 +9,15 @@
 
 ![SocialPreview](https://github.com/PatilShreyas/EasyUpiPayment-Android/raw/master/images/GitHub-SocialPreview.png)
 
-Welcome! If you want to integrate UPI payments in Android app then you're at right place.
+Welcome! If you want to integrate UPI payments in Android app then you're at the right place.
 
 ## Introduction
 
 - This library acts as a mediator between your app and UPI apps (_which are already installed in device_).
 - This library is based on [**_these_**](https://www.npci.org.in/sites/default/files/UPI%20Linking%20Specs_ver%201.6.pdf) specifications provided by _NPCI (National Payments Corporation of India)_.
 - This library is based on Android Intent based operations.
-- Whenever payment is initiated, it simply sends the `Intent` to the UPI apps installed on device.
-- When transaction is done, response is returned from library.
+- Whenever payment is initiated, it simply sends the `Intent` to the UPI apps installed on the device.
+- When transaction is done, response is returned from the library.
 
 ## Flow
 

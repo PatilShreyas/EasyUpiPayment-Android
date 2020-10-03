@@ -2,7 +2,7 @@
 
 If you ***don't want to give user a choice*** to pay using one of the multiple available UPI apps then you can set specific payment app for transaction.
 
-?> In such cases, payment will only be possible if that specific app is installed on user device.
+?> In such cases, payment will only be possible if that specific app is installed on user's device.
 
 ### Set default app for payment
 
