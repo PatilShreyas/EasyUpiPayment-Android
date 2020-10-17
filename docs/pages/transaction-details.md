@@ -1,6 +1,6 @@
 # Getting Transaction Details
 
-Once transaction is completed, `onTransactionCompleted()` gets invoked (as we seen in previous section). In that callback, you'll get instance of `TransactionDetails`. 
+Once transaction is completed, `onTransactionCompleted()` gets invoked (as we seen in previous section). In that callback, you'll get instance of `TransactionDetails`.
 
 `TransactionDetails` instance includes details about previously completed transaction.
 To get details, below method of TransactionDetails are useful:
@@ -45,10 +45,10 @@ To get details, below method of TransactionDetails are useful:
 
 ## Transaction State
 
-In *TransactionStatus*, you'll get ENUM among `SUBMITTED`, `SUCCESS` and `FAILURE`. Their meaning is:
+In _TransactionStatus_, you'll get ENUM among `SUBMITTED`, `SUCCESS` and `FAILURE`. Their meaning is:
 
-| Status Enum                   | Meaning                                                          |
-| ----------------------------- | ---------------------------------------------------------------- |
-| `TransactionStatus.SUBMITTED` | 🟡 Transaction is in ***PENDING*** state. Money might deducted from user's account but not deposited in payee's account.     |
-| `TransactionStatus.SUCCESS`   | 🟢 Transaction is successful. |
-| `TransactionStatus.FAILED`    | 🔴 Transaction is failed.     |
+| Status Enum                   | Meaning                                                                                                                          |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `TransactionStatus.SUBMITTED` | 🟡 Transaction is in **_PENDING_** state. Money might get deducted from user's account but not yet deposited in payee's account. |
+| `TransactionStatus.SUCCESS`   | 🟢 Transaction is successful.                                                                                                    |
+| `TransactionStatus.FAILED`    | 🔴 Transaction is failed.                                                                                                        |
