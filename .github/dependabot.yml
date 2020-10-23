@@ -11,4 +11,4 @@ updates:
       interval: "daily"
       
     commit-message:
-      prefix: "[Update Dependency]"
+      prefix: "[Dependency]"
