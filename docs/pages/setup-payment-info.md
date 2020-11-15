@@ -14,6 +14,7 @@ To setup payment, make sure you're implementing in `Activity`. It's recommended 
 val easyUpiPayment = EasyUpiPayment(this) {
     this.payeeVpa = "example@upi"
     this.payeeName = "Narendra Modi"
+    this.payeeMerchantCode = "12345"
     this.transactionId = "T2020090212345"
     this.transactionRefId = "T2020090212345"
     this.description = "Description"
@@ -29,6 +30,7 @@ Use `EasyUpiPayment.Builder` to set payment information.
 EasyUpiPayment.Builder builder = new EasyUpiPayment.Builder(this)
         .setPayeeVpa("example@vpa")
         .setPayeeName("Narendra Modi")
+        .setPayeeMerchantCode("12345")
         .setTransactionId("T2020090212345")
         .setTransactionRefId("T2020090212345")
         .setDescription("Description")
@@ -61,6 +63,12 @@ EasyUpiPayment easyUpiPayment = builder.build();
     <td>It takes VPA address of payee for e.g. <span style="font-weight:600">shreyas@upi</span></td>
   </tr>
   <tr>
+    <td><code>payeeMerchantCode</code></td>
+    <td><code>setPayeeMerchantCode()</code></td>
+    <td>✔️</td>
+    <td>Payee Merchant code. This should be valid.</td>
+  </tr>
+  <tr>
     <td><code>transactionId</code></td>
     <td><code>setTransactionId()</code></td>
     <td>✔️</td>
@@ -85,12 +93,6 @@ EasyUpiPayment easyUpiPayment = builder.build();
     <td>It takes the amount in String decimal format (xx.xx) to be paid. <br>For e.g. 90.88 will pay <span style="font-style:italic">Rs. 90.88.</span></td>
   </tr>
   <tr>
-    <td><code>payeeMerchantCode</code></td>
-    <td><code>setPayeeMerchantCode()</code></td>
-    <td>❌</td>
-    <td>Payee Merchant code if present it should be passed.</td>
-  </tr>
-  <tr>
     <td>❌No need❌</td>
     <td><code>build()<code></td>
     <td>✔️</td>
@@ -98,4 +100,5 @@ EasyUpiPayment easyUpiPayment = builder.build();
   </tr>
 </table>
 
-!> If any of the above field is initiated using invalid values then `Builder` will throw `IllegalStateException` with appropriate message. Make sure you're handling it.
+!> _Payee should be a valid merchant account holder otherwise transaction won't be completed._
+If any of the above field is initiated using invalid values then `Builder` will throw `IllegalStateException` with appropriate message. Make sure you're handling it.

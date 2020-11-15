@@ -4,6 +4,11 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 
 ---
 
+## _v3.0.1_ (2020-11-15)
+
+Make Payee merchant code as required field. (This will be required parameter from this version as UPI payment will be only processed if payee account is a valid **merchant account**.)
+If this parameter is not provided with _EasyUpiPayment_ `Builder` then it'll throw `IllegalStateException`.
+
 ## _v3.0.0_ (2020-09-04)
 
 - Moved to [symantic versioning](https://semver.org/) from this release.

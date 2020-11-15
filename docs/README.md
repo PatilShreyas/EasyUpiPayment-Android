@@ -18,6 +18,7 @@ Welcome! If you want to integrate UPI payments in Android app then you're at rig
 - This library is based on Android Intent based operations.
 - Whenever payment is initiated, it simply sends the `Intent` to the UPI apps installed on device.
 - When transaction is done, response is returned from library.
+- Payment will be only processed when payee is having a **valid merchant account of UPI**. Otherwise, payment won't be successful. This _won't work for general UPI payee user_.
 
 ## Flow
 
