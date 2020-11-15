@@ -5,6 +5,7 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 ---
 
 ## _v3.0.1_ (2020-11-15)
+This release fixes issue [#67](https://github.com/PatilShreyas/EasyUpiPayment-Android/issues/67)
 
 Make Payee merchant code as required field. (This will be required parameter from this version as UPI payment will be only processed if payee account is a valid **merchant account**.)
 If this parameter is not provided with _EasyUpiPayment_ `Builder` then it'll throw `IllegalStateException`.
