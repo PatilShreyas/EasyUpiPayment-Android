@@ -32,7 +32,7 @@ class PaymentUiActivity : AppCompatActivity() {
 				appendQueryParameter("pa", vpa)
 				appendQueryParameter("pn", name)
 				appendQueryParameter("tid", txnId)
-				payeeMerchantCode?.let { appendQueryParameter("mc", it) }
+				appendQueryParameter("mc", payeeMerchantCode)
 				appendQueryParameter("tr", txnRefId)
 				appendQueryParameter("tn", description)
 				appendQueryParameter("am", amount)
@@ -45,9 +45,7 @@ class PaymentUiActivity : AppCompatActivity() {
 			data = paymentUri
 
 			// Check for Default package
-			payment.defaultPackage?.let {
-				`package` = it
-			}
+			payment.defaultPackage?.let { `package` = it }
 		}
 
 		// Show Dialog to user
