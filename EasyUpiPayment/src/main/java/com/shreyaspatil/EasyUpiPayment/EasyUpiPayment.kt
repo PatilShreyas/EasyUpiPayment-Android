@@ -209,7 +209,7 @@ class EasyUpiPayment constructor(
 				currency = "INR",
 				vpa = payeeVpa!!,
 				name = payeeName!!,
-				payeeMerchantCode = payeeMerchantCode,
+				payeeMerchantCode = payeeMerchantCode!!,
 				txnId = transactionId!!,
 				txnRefId = transactionRefId!!,
 				description = description!!,
@@ -233,8 +233,8 @@ class EasyUpiPayment constructor(
 				}
 			}
 
-			payeeMerchantCode?.let {
-				check(it.isNotBlank()) { "Merchant Code Should be Valid!" }
+			payeeMerchantCode?.run {
+				checkNotNull(this) { "Payee Merchant Code Should be Valid!" }
 			}
 
 			transactionId.run {

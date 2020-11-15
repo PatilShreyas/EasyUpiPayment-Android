@@ -6,7 +6,7 @@ data class Payment(
 	var currency: String,
 	var vpa: String,
 	var name: String,
-	var payeeMerchantCode: String?,
+	var payeeMerchantCode: String,
 	var txnId: String,
 	var txnRefId: String,
 	var description: String,

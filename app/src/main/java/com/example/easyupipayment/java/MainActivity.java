@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
     private EditText fieldPayeeVpa;
     private EditText fieldPayeeName;
+    private EditText fieldPayeeMerchantCode;
     private EditText fieldTransactionId;
     private EditText fieldTransactionRefId;
     private EditText fieldDescription;
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
         fieldPayeeVpa = findViewById(R.id.field_vpa);
         fieldPayeeName = findViewById(R.id.field_name);
+        fieldPayeeMerchantCode = findViewById(R.id.field_payee_merchant_code);
         fieldTransactionId = findViewById(R.id.field_transaction_id);
         fieldTransactionRefId = findViewById(R.id.field_transaction_ref_id);
         fieldDescription = findViewById(R.id.field_description);
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private void pay() {
         String payeeVpa = fieldPayeeVpa.getText().toString();
         String payeeName = fieldPayeeName.getText().toString();
+        String payeeMerchantCode = fieldPayeeMerchantCode.getText().toString();
         String transactionId = fieldTransactionId.getText().toString();
         String transactionRefId = fieldTransactionRefId.getText().toString();
         String description = fieldDescription.getText().toString();
@@ -108,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
                 .setPayeeName(payeeName)
                 .setTransactionId(transactionId)
                 .setTransactionRefId(transactionRefId)
+                .setPayeeMerchantCode(payeeMerchantCode)
                 .setDescription(description)
                 .setAmount(amount);
         // END INITIALIZATION
