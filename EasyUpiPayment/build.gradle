@@ -4,7 +4,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka'
 
-version = "3.0.0"
+version = "3.0.1"
 
 android {
     compileSdkVersion 30
