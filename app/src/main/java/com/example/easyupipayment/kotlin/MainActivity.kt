@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 		val payeeName = field_name.text.toString()
 		val transactionId = field_transaction_id.text.toString()
 		val transactionRefId = field_transaction_ref_id.text.toString()
+		val payeeMerchantCode = field_payee_merchant_code.text.toString()
 		val description = field_description.text.toString()
 		val amount = field_amount.text.toString()
 		val paymentAppChoice = radioAppChoice
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
 				this.payeeName = payeeName
 				this.transactionId = transactionId
 				this.transactionRefId = transactionRefId
+				this.payeeMerchantCode = payeeMerchantCode
 				this.description = description
 				this.amount = amount
 			}
