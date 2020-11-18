@@ -1,5 +1,6 @@
 package com.shreyaspatil.easyupipayment.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -18,11 +19,12 @@ class PaymentUiActivity : AppCompatActivity() {
 
     private lateinit var payment: Payment
 
+    @SuppressLint("QueryPermissionsNeeded")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val view = intent.getIntExtra(CUSTOM_VIEW, R.layout.activity_upipay)
-        setContentView(view)
+        intent.getIntExtra(CUSTOM_THEME, 0).let { if (it != 0) setTheme(it) }
+        setContentView(R.layout.activity_upipay)
 
         payment = (intent.getSerializableExtra(EXTRA_KEY_PAYMENT) as Payment?)
                 ?: throw IllegalStateException("Unable to parse payment details")
@@ -143,7 +145,7 @@ class PaymentUiActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val CUSTOM_VIEW = "custom_view"
+        const val CUSTOM_THEME = "custom_theme"
         const val TAG = "PaymentUiActivity"
         const val PAYMENT_REQUEST = 4400
         const val EXTRA_KEY_PAYMENT = "payment"

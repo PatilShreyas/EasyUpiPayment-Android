@@ -3,7 +3,7 @@ package com.shreyaspatil.easyupipayment
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -16,6 +16,7 @@ import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
 import com.shreyaspatil.easyupipayment.model.Payment
 import com.shreyaspatil.easyupipayment.model.PaymentApp
 import com.shreyaspatil.easyupipayment.ui.PaymentUiActivity
+
 
 /**
  * Class to implement Easy UPI Payment
@@ -30,6 +31,8 @@ class EasyUpiPayment constructor(
     @VisibleForTesting
     @get:JvmSynthetic
     internal lateinit var activityLifecycleObserver: LifecycleObserver
+
+    private var customTheme: Int = 0
 
     init {
         if (mActivity is AppCompatActivity) {
@@ -54,18 +57,30 @@ class EasyUpiPayment constructor(
      * Starts the payment transaction. Calling this method launches the Payment Menu
      * and shows installed UPI apps in device and let user choose one of them to pay.
      *
-     * @param customView Pass your customised layout file to show instead of default ProgressBar
+     * @param useActivityTheme Pass true to use passed Activity's theme instead, default is false
      */
     @JvmOverloads
-    fun startPayment(@LayoutRes customView: Int = R.layout.activity_upipay) {
+    fun startPayment(useActivityTheme: Boolean = false) {
         // Create Payment Activity Intent
+        if (useActivityTheme && customTheme != 0) throw IllegalArgumentException("You cannot set both useActivityTheme & customTheme attributes")
         val payIntent = Intent(mActivity, PaymentUiActivity::class.java).apply {
             putExtra(PaymentUiActivity.EXTRA_KEY_PAYMENT, mPayment)
-            putExtra(PaymentUiActivity.CUSTOM_VIEW, customView)
+            if (useActivityTheme) {
+                val themeResId = mActivity.packageManager.getActivityInfo(mActivity.componentName, 0).themeResource
+                putExtra(PaymentUiActivity.CUSTOM_THEME, themeResId)
+            } else if (customTheme != 0) putExtra(PaymentUiActivity.CUSTOM_THEME, customTheme)
         }
 
         // Start Payment Activity
         mActivity.startActivity(payIntent)
+    }
+
+    /**
+     * Set a custom theme for the PaymentUiActivity
+     * @param customTheme pass a custom theme for the [PaymentUiActivity]
+     */
+    fun setCustomTheme(@StyleRes customTheme: Int) {
+        this.customTheme = customTheme
     }
 
     /**
