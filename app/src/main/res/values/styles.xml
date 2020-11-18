@@ -8,4 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="PaymentUITheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">@android:color/holo_blue_dark</item>
+        <item name="colorAccent">@android:color/holo_blue_light</item>
+    </style>
+
 </resources>

@@ -12,14 +12,12 @@ import com.shreyaspatil.easyupipayment.model.TransactionDetails
 import com.shreyaspatil.easyupipayment.model.TransactionStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), PaymentStatusListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main), PaymentStatusListener {
 
     private lateinit var easyUpiPayment: EasyUpiPayment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
         initViews()
     }
 
@@ -67,8 +65,10 @@ class MainActivity : AppCompatActivity(), PaymentStatusListener {
             // Register Listener for Events
             easyUpiPayment.setPaymentStatusListener(this)
 
+            easyUpiPayment.setCustomTheme(R.style.PaymentUITheme)
+
             // Start payment / transaction
-            easyUpiPayment.startPayment(R.layout.custom_upi_layout)
+            easyUpiPayment.startPayment()
         } catch (e: Exception) {
             e.printStackTrace()
             toast("Error: ${e.message}")
