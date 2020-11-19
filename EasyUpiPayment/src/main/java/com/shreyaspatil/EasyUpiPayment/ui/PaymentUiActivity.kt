@@ -1,6 +1,5 @@
 package com.shreyaspatil.easyupipayment.ui
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -19,7 +18,6 @@ class PaymentUiActivity : AppCompatActivity() {
 
     private lateinit var payment: Payment
 
-    @SuppressLint("QueryPermissionsNeeded")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -36,7 +34,7 @@ class PaymentUiActivity : AppCompatActivity() {
                 appendQueryParameter("pa", vpa)
                 appendQueryParameter("pn", name)
                 appendQueryParameter("tid", txnId)
-                payeeMerchantCode?.let { appendQueryParameter("mc", it) }
+                appendQueryParameter("mc", payeeMerchantCode)
                 appendQueryParameter("tr", txnRefId)
                 appendQueryParameter("tn", description)
                 appendQueryParameter("am", amount)
@@ -49,9 +47,7 @@ class PaymentUiActivity : AppCompatActivity() {
             data = paymentUri
 
             // Check for Default package
-            payment.defaultPackage?.let {
-                `package` = it
-            }
+            payment.defaultPackage?.let { `package` = it }
         }
 
         // Show Dialog to user
@@ -145,8 +141,8 @@ class PaymentUiActivity : AppCompatActivity() {
     }
 
     companion object {
-        const val CUSTOM_THEME = "custom_theme"
         const val TAG = "PaymentUiActivity"
+        const val CUSTOM_THEME = "custom_theme"
         const val PAYMENT_REQUEST = 4400
         const val EXTRA_KEY_PAYMENT = "payment"
     }

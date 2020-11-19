@@ -3,7 +3,6 @@ package com.shreyaspatil.easyupipayment
 import android.app.Activity
 import android.content.Intent
 import android.util.Log
-import androidx.annotation.StyleRes
 import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
@@ -16,7 +15,6 @@ import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
 import com.shreyaspatil.easyupipayment.model.Payment
 import com.shreyaspatil.easyupipayment.model.PaymentApp
 import com.shreyaspatil.easyupipayment.ui.PaymentUiActivity
-
 
 /**
  * Class to implement Easy UPI Payment
@@ -31,8 +29,6 @@ class EasyUpiPayment constructor(
     @VisibleForTesting
     @get:JvmSynthetic
     internal lateinit var activityLifecycleObserver: LifecycleObserver
-
-    private var customTheme: Int = 0
 
     init {
         if (mActivity is AppCompatActivity) {
@@ -62,25 +58,16 @@ class EasyUpiPayment constructor(
     @JvmOverloads
     fun startPayment(useActivityTheme: Boolean = false) {
         // Create Payment Activity Intent
-        if (useActivityTheme && customTheme != 0) throw IllegalArgumentException("You cannot set both useActivityTheme & customTheme attributes")
         val payIntent = Intent(mActivity, PaymentUiActivity::class.java).apply {
             putExtra(PaymentUiActivity.EXTRA_KEY_PAYMENT, mPayment)
             if (useActivityTheme) {
                 val themeResId = mActivity.packageManager.getActivityInfo(mActivity.componentName, 0).themeResource
                 putExtra(PaymentUiActivity.CUSTOM_THEME, themeResId)
-            } else if (customTheme != 0) putExtra(PaymentUiActivity.CUSTOM_THEME, customTheme)
+            }
         }
 
         // Start Payment Activity
         mActivity.startActivity(payIntent)
-    }
-
-    /**
-     * Set a custom theme for the PaymentUiActivity
-     * @param customTheme pass a custom theme for the [PaymentUiActivity]
-     */
-    fun setCustomTheme(@StyleRes customTheme: Int) {
-        this.customTheme = customTheme
     }
 
     /**
@@ -229,7 +216,7 @@ class EasyUpiPayment constructor(
                     currency = "INR",
                     vpa = payeeVpa!!,
                     name = payeeName!!,
-                    payeeMerchantCode = payeeMerchantCode,
+                    payeeMerchantCode = payeeMerchantCode!!,
                     txnId = transactionId!!,
                     txnRefId = transactionRefId!!,
                     description = description!!,
@@ -253,8 +240,8 @@ class EasyUpiPayment constructor(
                 }
             }
 
-            payeeMerchantCode?.let {
-                check(it.isNotBlank()) { "Merchant Code Should be Valid!" }
+            payeeMerchantCode?.run {
+                checkNotNull(this) { "Payee Merchant Code Should be Valid!" }
             }
 
             transactionId.run {
