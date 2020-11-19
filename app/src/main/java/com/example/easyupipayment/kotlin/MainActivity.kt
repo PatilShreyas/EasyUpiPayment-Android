@@ -65,10 +65,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), PaymentStatusLis
             // Register Listener for Events
             easyUpiPayment.setPaymentStatusListener(this)
 
-            easyUpiPayment.setCustomTheme(R.style.PaymentUITheme)
-
             // Start payment / transaction
-            easyUpiPayment.startPayment()
+            easyUpiPayment.startPayment(true)
         } catch (e: Exception) {
             e.printStackTrace()
             toast("Error: ${e.message}")

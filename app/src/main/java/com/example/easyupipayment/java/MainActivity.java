@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
     private EditText fieldDescription;
     private EditText fieldAmount;
 
+    private EasyUpiPayment easyUpiPayment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,12 +114,10 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
 
         try {
             // Build instance
-            EasyUpiPayment easyUpiPayment = builder.build();
+            easyUpiPayment = builder.build();
 
             // Register Listener for Events
             easyUpiPayment.setPaymentStatusListener(this);
-
-            easyUpiPayment.setCustomTheme(R.style.PaymentUITheme);
 
             // Start payment / transaction
             easyUpiPayment.startPayment();
