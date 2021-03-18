@@ -1,4 +1,4 @@
-package com.shreyaspatil.easyupipayment
+package dev.shreyaspatil.easyupipayment
 
 import android.app.Activity
 import android.content.Intent
@@ -9,12 +9,12 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.OnLifecycleEvent
-import com.shreyaspatil.easyupipayment.EasyUpiPayment.Builder
-import com.shreyaspatil.easyupipayment.exception.AppNotFoundException
-import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
-import com.shreyaspatil.easyupipayment.model.Payment
-import com.shreyaspatil.easyupipayment.model.PaymentApp
-import com.shreyaspatil.easyupipayment.ui.PaymentUiActivity
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment.Builder
+import dev.shreyaspatil.easyupipayment.exception.AppNotFoundException
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.Payment
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.ui.PaymentUiActivity
 
 /**
  * Class to implement Easy UPI Payment

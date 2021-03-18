@@ -1,6 +1,6 @@
-package com.shreyaspatil.easyupipayment
+package dev.shreyaspatil.easyupipayment
 
-import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
 
 internal object Singleton {
 	@set:JvmSynthetic

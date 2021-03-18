@@ -1,4 +1,4 @@
-package com.shreyaspatil.easyupipayment.model
+package dev.shreyaspatil.easyupipayment.model
 
 data class TransactionDetails(
 	val transactionId: String?,

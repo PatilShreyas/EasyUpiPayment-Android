@@ -1,4 +1,4 @@
-package com.shreyaspatil.easyupipayment.ui
+package dev.shreyaspatil.easyupipayment.ui
 
 import android.content.Intent
 import android.net.Uri
@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.shreyaspatil.easyupipayment.R
-import com.shreyaspatil.easyupipayment.Singleton
-import com.shreyaspatil.easyupipayment.exception.AppNotFoundException
-import com.shreyaspatil.easyupipayment.model.Payment
-import com.shreyaspatil.easyupipayment.model.TransactionDetails
-import com.shreyaspatil.easyupipayment.model.TransactionStatus
+import dev.shreyaspatil.easyupipayment.R
+import dev.shreyaspatil.easyupipayment.Singleton
+import dev.shreyaspatil.easyupipayment.exception.AppNotFoundException
+import dev.shreyaspatil.easyupipayment.model.Payment
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.model.TransactionStatus
 import java.util.*
 
 class PaymentUiActivity : AppCompatActivity() {

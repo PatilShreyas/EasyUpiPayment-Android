@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
-import com.shreyaspatil.easyupipayment.model.PaymentApp
-import com.shreyaspatil.easyupipayment.testutils.*
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.Singleton
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.testutils.*
 import junit.framework.TestCase.assertNotNull
 import junit.framework.TestCase.assertNull
 import org.hamcrest.CoreMatchers.equalTo

@@ -1,4 +1,4 @@
-package com.shreyaspatil.easyupipayment.model
+package dev.shreyaspatil.easyupipayment.model
 
 @Suppress("SpellCheckingInspection")
 enum class PaymentApp(val packageName: String) {

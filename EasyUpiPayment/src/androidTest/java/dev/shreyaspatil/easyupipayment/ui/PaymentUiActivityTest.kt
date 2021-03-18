@@ -7,8 +7,9 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.core.app.launchActivity
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.android.dx.mockito.inline.extended.ExtendedMockito.spyOn
-import com.shreyaspatil.easyupipayment.model.PaymentApp
-import com.shreyaspatil.easyupipayment.testutils.paymentWith
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.testutils.paymentWith
+import dev.shreyaspatil.easyupipayment.ui.PaymentUiActivity
 import junit.framework.TestCase.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith

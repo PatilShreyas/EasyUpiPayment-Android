@@ -1,10 +1,10 @@
-package com.shreyaspatil.easyupipayment.testutils
+package dev.shreyaspatil.easyupipayment.testutils
 
-import com.shreyaspatil.easyupipayment.EasyUpiPayment
-import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
-import com.shreyaspatil.easyupipayment.model.Payment
-import com.shreyaspatil.easyupipayment.model.PaymentApp
-import com.shreyaspatil.easyupipayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.Payment
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
 
 const val validVpa = "example@vpa"
 const val invalidVpa = "emample"
@@ -41,7 +41,7 @@ fun paymentWith(paymentApp: PaymentApp? = null) = Payment(
 	"INT",
 	validVpa,
 	validName,
-	null,
+	"",
 	validTransactionId,
 	validTransactionId,
 	validDescription,

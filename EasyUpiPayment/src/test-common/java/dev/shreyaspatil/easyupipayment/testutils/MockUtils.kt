@@ -1,4 +1,4 @@
-package com.shreyaspatil.easyupipayment.testutils
+package dev.shreyaspatil.easyupipayment.testutils
 
 import org.mockito.Mockito
 
