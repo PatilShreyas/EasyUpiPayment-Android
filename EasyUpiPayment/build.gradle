@@ -54,7 +54,7 @@ dependencies {
     // Testing
     testImplementation 'junit:junit:4.13.1'
     testImplementation 'androidx.test:core:1.3.0'
-    testImplementation 'org.mockito:mockito-core:3.5.0'
+    testImplementation 'org.mockito:mockito-core:3.8.0'
 
     // Dokka
     dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.30")
