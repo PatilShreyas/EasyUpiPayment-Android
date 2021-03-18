@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.shreyaspatil.easyupipayment">
+    package="dev.shreyaspatil.easyupipayment">
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.CHOOSER" />
+            <data android:scheme="upi" />
+        </intent>
+    </queries>
 
     <application>
         <activity
-            android:name="com.shreyaspatil.easyupipayment.ui.PaymentUiActivity"
+            android:name=".ui.PaymentUiActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </application>
 

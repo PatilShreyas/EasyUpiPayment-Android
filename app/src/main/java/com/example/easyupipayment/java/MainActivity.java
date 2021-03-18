@@ -1,5 +1,6 @@
 package com.example.easyupipayment.java;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -13,10 +14,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.easyupipayment.R;
-import com.shreyaspatil.easyupipayment.EasyUpiPayment;
-import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener;
-import com.shreyaspatil.easyupipayment.model.PaymentApp;
-import com.shreyaspatil.easyupipayment.model.TransactionDetails;
+
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment;
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener;
+import dev.shreyaspatil.easyupipayment.model.PaymentApp;
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails;
 
 public class MainActivity extends AppCompatActivity implements PaymentStatusListener {
 
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements PaymentStatusList
         radioAppChoice = findViewById(R.id.radioAppChoice);
     }
 
+    @SuppressLint("NonConstantResourceId")
     private void pay() {
         String payeeVpa = fieldPayeeVpa.getText().toString();
         String payeeName = fieldPayeeName.getText().toString();

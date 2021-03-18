@@ -1,19 +1,15 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
 apply plugin: 'org.jetbrains.dokka'
-
-version = "3.0.1"
 
 android {
     compileSdkVersion 30
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 30
-        versionCode 4
-        versionName version
+        versionCode 5
+        versionName VERSION_NAME
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -60,6 +56,9 @@ dependencies {
     testImplementation 'androidx.test:core:1.3.0'
     testImplementation 'org.mockito:mockito-core:3.5.0'
 
+    // Dokka
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.30")
+
     // Android Testing
     androidTestImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'androidx.test:core-ktx:1.3.0'
@@ -70,132 +69,14 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'org.mockito:mockito-core:3.5.0'
     androidTestImplementation 'com.linkedin.dexmaker:dexmaker-mockito-inline-extended:2.28.0'
-
 }
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = "ktdocs/"
-
-    configuration {
-        includeNonPublic = false
-    }
-}
-
-ext {
-    bintrayRepo = 'maven'
-    bintrayName = 'EasyUpiPayment-Android'
-
-    publishedGroupId = 'com.shreyaspatil'
-    libraryName = 'EasyUpiPayment'
-    artifact = 'EasyUpiPayment'
-    libraryDescription = 'Android Library to integrate UPI payment service easily in your Android app'
-
-
-    // Your github repo link
-    siteUrl = 'https://github.com/patilshreyas/EasyUpiPayment-Android'
-    gitUrl = 'https://github.com/patilshreyas/EasyUpiPayment-Android.git'
-    githubRepository = 'patilshreyas/EasyUpiPayment'
-
-    libraryVersion = version
-
-    developerId = 'patilshreyas'
-    developerName = 'Shreyas Patil'
-    developerEmail = 'shreyaspatilg@gmail.com'
-
-    licenseName = 'The Apache Software License, Version 2.0'
-    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-    allLicenses = ["Apache-2.0"]
-}
-
-group = publishedGroupId
-def siteUrl = 'https://github.com/PatilShreyas/EasyUpiPayment-Android'
-def gitUrl = 'https://github.com/PatilShreyas/EasyUpiPayment-Android.git'
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-
-                // Add your description here
-                groupId 'com.shreyaspatil'
-                artifactId = 'EasyUpiPayment'
-                name 'EasyUpiPayment'
-                description = 'Android Library to integrate UPI payment service easily in your Android app'
-                url siteUrl
-
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'PatilShreyas'
-                        name 'Shreyas Patil'
-                        email 'shreyaspatilg@gmail.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
+dokkaHtml.configure {
+    dokkaSourceSets {
+        named("main") {
+            noAndroidSdkLink.set(false)
         }
     }
 }
 
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-// Avoid Kotlin docs error
-tasks.withType(Javadoc) {
-    enabled = false
-}
-
-// Remove javadoc related tasks
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-// https://github.com/bintray/gradle-bintray-plugin
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        // it is the name that appears in bintray when logged
-        name = "com.shreyaspatil:EasyUpiPayment"
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-        version {
-            gpg {
-                sign = true //Determines whether to GPG sign the files. The default is false
-                passphrase = properties.getProperty("bintray.gpg.password")
-                //Optional. The passphrase for GPG signing'
-            }
-        }
-    }
-}
-repositories {
-    mavenCentral()
-}
+apply plugin: 'com.vanniktech.maven.publish'

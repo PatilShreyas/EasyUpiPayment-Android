@@ -1,8 +1,0 @@
-$dokka.format:html
-$dokka.linkExtension:html
-
-com.shreyaspatil.easyupipayment
-com.shreyaspatil.easyupipayment.exception
-com.shreyaspatil.easyupipayment.listener
-com.shreyaspatil.easyupipayment.model
-com.shreyaspatil.easyupipayment.ui

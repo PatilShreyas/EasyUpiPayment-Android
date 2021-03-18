@@ -5,11 +5,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.easyupipayment.R
-import com.shreyaspatil.easyupipayment.EasyUpiPayment
-import com.shreyaspatil.easyupipayment.listener.PaymentStatusListener
-import com.shreyaspatil.easyupipayment.model.PaymentApp
-import com.shreyaspatil.easyupipayment.model.TransactionDetails
-import com.shreyaspatil.easyupipayment.model.TransactionStatus
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.model.TransactionStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), PaymentStatusListener {

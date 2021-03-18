@@ -4,6 +4,13 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 
 ---
 
+## _v3.0.2_ (2021-03-18)
+This release includes minor additions.
+
+- Provided `<query>` in library Manifest to support _Android 11 and Above_.
+- Library made available from `mavenCentral()`.
+- Moved all classes from `com.*` package to `dev.*` package. _Make sure to migrate usage of package imports._
+
 ## _v3.0.1_ (2020-11-15)
 This release fixes issue [#67](https://github.com/PatilShreyas/EasyUpiPayment-Android/issues/67)
 
