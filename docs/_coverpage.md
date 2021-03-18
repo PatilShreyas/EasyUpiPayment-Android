@@ -10,4 +10,4 @@
 
 [Get Started](/?id=easy-upi-payment-android-library)
 [GitHub](https://github.com/PatilShreyas/EasyUpiPayment-Android)
-[Bintray](https://bintray.com/beta/#/patilshreyas/maven/com.shreyaspatil:EasyUpiPayment?tab=overview)
+[Maven Central](https://search.maven.org/artifact/dev.shreyaspatil.EasyUpiPayment/EasyUpiPayment)
