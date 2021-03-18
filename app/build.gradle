@@ -22,7 +22,7 @@ android {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
     }
-    buildToolsVersion '30.0.2'
+    buildToolsVersion '30.0.3'
 }
 
 dependencies {
@@ -37,7 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // EasyUpiPayment Library
-    implementation 'com.shreyaspatil:EasyUpiPayment:3.0.1'
+    implementation 'dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.2'
 
 //    implementation project(path: ':EasyUpiPayment')
 }
