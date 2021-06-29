@@ -37,7 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     // EasyUpiPayment Library
-    implementation 'dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.2'
+    implementation 'dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.3'
 
 //    implementation project(path: ':EasyUpiPayment')
 }
