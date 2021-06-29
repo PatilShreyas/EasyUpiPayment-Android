@@ -1,6 +1,6 @@
 # Easy UPI Payment - Android Library
 
-![Bintray](https://img.shields.io/bintray/v/patilshreyas/maven/com.shreyaspatil:EasyUpiPayment?style=flat-square)
+![Maven Central](https://img.shields.io/maven-central/v/dev.shreyaspatil.EasyUpiPayment/EasyUpiPayment?label=mavenCentral)
 ![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg)
 ![Github Followers](https://img.shields.io/github/followers/PatilShreyas?label=Follow&style=square)
 ![GitHub stars](https://img.shields.io/github/stars/PatilShreyas/EasyUpiPayment-Android?style=square)

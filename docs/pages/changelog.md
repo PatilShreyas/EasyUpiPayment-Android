@@ -4,6 +4,14 @@ You can see [GitHub releases](https://github.com/PatilShreyas/EasyUpiPayment-And
 
 ---
 
+## _v3.0.3_ (2021-06-29)
+
+This release includes patch fixes.
+
+- Provided `<query>` in library Manifest for intent and specific UPI packages to support devices having _Android 11 and Above_.
+- Fix `ActivityNotFoundException` crash occurring on Android 11 devices due to missing query intents.
+
+
 ## _v3.0.2_ (2021-03-18)
 This release includes minor additions.
 
