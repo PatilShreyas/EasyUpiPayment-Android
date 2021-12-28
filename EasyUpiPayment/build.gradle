@@ -57,7 +57,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-core:3.5.0'
 
     // Dokka
-    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.4.30")
+    dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.6.10")
 
     // Android Testing
     androidTestImplementation 'androidx.test:core:1.3.0'
